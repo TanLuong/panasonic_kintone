@@ -30,7 +30,7 @@ declare const kintone: any;
     let record = event.record;
     if (record.SALES_DATE.value != '') {
       let date = new Date(record.SALES_DATE.value);
-      let month = date.toLocaleString('default', { month: 'short' });
+      let month = date.toLocaleString('en-US', { month: 'short' });
       record.Drop_down_2.value = financialYear(date);
       record.Drop_down_3.value = quarter(date.getMonth() + 1);
       record.EXCHANGERATE.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
@@ -68,8 +68,9 @@ declare const kintone: any;
     disableConditionFields(record);
     if (record.currency.value == 'SGD' && record.SALES_DATE.value) {
       let date = new Date(record.SALES_DATE.value);
-      let month = date.toLocaleString('default', { month: 'short' });
+      let month = date.toLocaleString('en-US', { month: 'short' });
       record.EXCHANGERATE.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
+      console.log('rate:', record.EXCHANGERATE.value);
     }
     return event;
   });
@@ -111,6 +112,8 @@ declare const kintone: any;
     'app.record.edit.show',
     'app.record.index.show',
     'mobile.app.record.index.show',
+    'mobile.app.record.create.show',
+    'mobile.app.record.edit.show',
   ]
 
   kintone.events.on(initShowEvents, function (event) {
@@ -133,7 +136,7 @@ declare const kintone: any;
     let record = event.record;
     if (record.SALES_DATE.value != '') {
       let date = new Date(record.SALES_DATE.value);
-      let month = date.toLocaleString('default', { month: 'short' });
+      let month = date.toLocaleString('en-US', { month: 'short' });
       record.Drop_down_2.value = financialYear(date);
       record.Drop_down_3.value = quarter(date.getMonth() + 1);
       record.EXCHANGERATE.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
@@ -156,7 +159,7 @@ declare const kintone: any;
     let record = event.record;
     if (!record) return event;
     let date = new Date(record.SALES_DATE.value);
-    let month = date.toLocaleString('default', { month: 'short' });
+    let month = date.toLocaleString('en-US', { month: 'short' });
     record.Drop_down_2.value = financialYear(date);
     record.Drop_down_3.value = quarter(date.getMonth() + 1);
     record.EXCHANGERATE.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
@@ -164,7 +167,7 @@ declare const kintone: any;
       return Swal.fire({
         icon: 'warning',
         title: 'Missing Exchange Rate',
-        text: `Total price will be 0.`,
+        text: `USD Total Price will be 0.00 USD.`,
       }).then((result) => {
         return event;
       });
