@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "esbuild": "0.25.9",
+    "typescript": "^5.9.2"
+  },
+  "scripts": {
+    "build-project-list-dev": "esbuild src/project-list-RHQ/index.ts --bundle --outfile=dist/project_list_index_dev.js --sourcemap && rsync -avrz --delete dist/project_list_index_dev.js ~/Dropbox/panasonic_kintone/dev && cp dist/index.css ~/Dropbox/panasonic_kintone",
+    "build-project-list-prod": "esbuild src/project-list-RHQ/index.ts --bundle --minify --outfile=dist/project_list_index_prod.js && rsync -avrz --delete dist/project_list_index_prod.js ~/Dropbox/panasonic_kintone/prod",
+    "build-exchange-rate-dev": "esbuild src/exchange-rate/index.ts --bundle --outfile=dist/exchange_rate_index_dev.js --sourcemap && rsync -avrz --delete dist/exchange_rate_index_dev.js ~/Dropbox/panasonic_kintone/dev"
+  },
+  "dependencies": {
+    "sweetalert2": "^11.22.5"
+  }
+}
