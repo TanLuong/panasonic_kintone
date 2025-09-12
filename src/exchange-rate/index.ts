@@ -26,7 +26,7 @@ const durationDateOfMonth = (month: number, year: number): number => {
     let sale_month = `${record.month.value}, ${record.year.value}`;
     let body = {
       app: PROJECT_LIST_APP_ID,
-      query: `sale_month = "${sale_month}"`,
+      query: `sale_month = "${sale_month}" and currency in ("SGD")`,
       fields: ['$id']
     };
     return kintone.api(kintone.api.url('/k/v1/records', true), 'GET', body).then(function (resp: any) {
@@ -49,7 +49,7 @@ const durationDateOfMonth = (month: number, year: number): number => {
             return {
               id: r.$id.value,
               record: {
-                EXCHANGERATE: {
+                exchange_rate: {
                   value: record.rate.value
                 }
               }
@@ -77,7 +77,8 @@ const durationDateOfMonth = (month: number, year: number): number => {
         }).then(() => {
           return event;
         });
-      }).catch((err) => {
+      })  
+    }).catch((err) => {
         return Swal.fire({
           icon: 'error',
           title: 'Update exchange rate at project list app',
@@ -85,8 +86,7 @@ const durationDateOfMonth = (month: number, year: number): number => {
         }).then(() => {
           return event;
         });
-      });    
-    })
+      });  
   });
 
 })();

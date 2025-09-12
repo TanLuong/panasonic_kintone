@@ -19,40 +19,40 @@ declare const kintone: any;
   let exchangeRateDictionary = {};
 
   const saleDateChangeEvents: string[] = [
-    'app.record.create.change.SALES_DATE',
-    'app.record.edit.change.SALES_DATE',
-    'app.record.index.edit.change.SALES_DATE',
-    'mobile.app.record.create.change.SALES_DATE',
-    'mobile.app.record.edit.change.SALES_DATE',
+    'app.record.create.change.sale_date',
+    'app.record.edit.change.sale_date',
+    'app.record.index.edit.change.sale_date',
+    'mobile.app.record.create.change.sale_date',
+    'mobile.app.record.edit.change.sale_date',
   ]
 
   kintone.events.on(saleDateChangeEvents, (event) => {
     let record = event.record;
-    if (record.SALES_DATE.value != '') {
-      let date = new Date(record.SALES_DATE.value);
+    if (record.sale_date.value != '') {
+      let date = new Date(record.sale_date.value);
       let month = date.toLocaleString('en-US', { month: 'short' });
-      record.Drop_down_2.value = financialYear(date);
-      record.Drop_down_3.value = quarter(date.getMonth() + 1);
-      record.EXCHANGERATE.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
+      record.financial_year.value = financialYear(date);
+      record.quarter.value = quarter(date.getMonth() + 1);
+      record.exchange_rate.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
     } else {
-      record.Drop_down_2.value = '';
-      record.Drop_down_3.value = '';
-      record.EXCHANGERATE.value = '';
+      record.financial_year.value = '';
+      record.quarter.value = '';
+      record.exchange_rate.value = '';
     }
     return event;
   });
 
   const probilityChangeEvents: string[] = [
-    'app.record.create.change.Drop_down_1',
-    'app.record.edit.change.Drop_down_1',
-    'app.record.index.edit.change.Drop_down_1',
-    'mobile.app.record.create.change.Drop_down_1',
-    'mobile.app.record.edit.change.Drop_down_1',
+    'app.record.create.change.probility',
+    'app.record.edit.change.probility',
+    'app.record.index.edit.change.probility',
+    'mobile.app.record.create.change.probility',
+    'mobile.app.record.edit.change.probility',
   ]
 
   kintone.events.on(probilityChangeEvents, (event) => {
     let record = event.record;
-    record.Drop_down_4.value = PSI(record.Drop_down_1.value);
+    record.psi.value = PSI(record.probility.value);
     return event;
   });
 
@@ -66,11 +66,11 @@ declare const kintone: any;
     kintone.events.on(currencyChangeEvents, (event) => {
     let record = event.record;
     disableConditionFields(record);
-    if (record.currency.value == 'SGD' && record.SALES_DATE.value) {
-      let date = new Date(record.SALES_DATE.value);
+    if (record.currency.value == 'SGD' && record.sale_date.value) {
+      let date = new Date(record.sale_date.value);
       let month = date.toLocaleString('en-US', { month: 'short' });
-      record.EXCHANGERATE.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
-      console.log('rate:', record.EXCHANGERATE.value);
+      record.exchange_rate.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
+      console.log('rate:', record.exchange_rate.value);
     }
     return event;
   });
@@ -103,7 +103,7 @@ declare const kintone: any;
     disableField(record, disableFields);
     disableConditionFields(record);
     disableCurrencyField(record);
-    record.Drop_down_4.value = PSI(record.Drop_down_1.value);
+    record.psi.value = PSI(record.probility.value);
     return event;
   });
 
@@ -134,13 +134,13 @@ declare const kintone: any;
 
   kintone.events.on(submitEvents, function (event) {
     let record = event.record;
-    if (record.SALES_DATE.value != '') {
-      let date = new Date(record.SALES_DATE.value);
+    if (record.sale_date.value != '') {
+      let date = new Date(record.sale_date.value);
       let month = date.toLocaleString('en-US', { month: 'short' });
-      record.Drop_down_2.value = financialYear(date);
-      record.Drop_down_3.value = quarter(date.getMonth() + 1);
-      record.EXCHANGERATE.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
-      if (!record.SGDUNITPRICE.value && !record.USDUNITPRICE.value) {
+      record.financial_year.value = financialYear(date);
+      record.quarter.value = quarter(date.getMonth() + 1);
+      record.exchange_rate.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
+      if (!record.unit_price_in_SGD.value && !record.unit_price_in_USD.value) {
         event.error = 'Unit Price is required, please enter value for one of currency';
       }
     }
@@ -158,12 +158,12 @@ declare const kintone: any;
   kintone.events.on(successEvents, function (event) {
     let record = event.record;
     if (!record) return event;
-    let date = new Date(record.SALES_DATE.value);
+    let date = new Date(record.sale_date.value);
     let month = date.toLocaleString('en-US', { month: 'short' });
-    record.Drop_down_2.value = financialYear(date);
-    record.Drop_down_3.value = quarter(date.getMonth() + 1);
-    record.EXCHANGERATE.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
-    if (!record.EXCHANGERATE.value && record.currency.value === 'SGD') {
+    record.financial_year.value = financialYear(date);
+    record.quarter.value = quarter(date.getMonth() + 1);
+    record.exchange_rate.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
+    if (!record.exchange_rate.value && record.currency.value === 'SGD') {
       return Swal.fire({
         icon: 'warning',
         title: 'Missing Exchange Rate',

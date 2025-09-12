@@ -16,30 +16,30 @@ export const event: any = (function () {
   let exchangeRateDictionary = {};
 
   const saleDateChangeEvents: string[] = [
-    'app.record.create.change.SALES_DATE',
-    'app.record.edit.change.SALES_DATE',
-    'app.record.index.edit.change.SALES_DATE',
+    'app.record.create.change.sale_date',
+    'app.record.edit.change.sale_date',
+    'app.record.index.edit.change.sale_date',
   ]
 
   kintone.events.on(saleDateChangeEvents, (event) => {
     let record = event.record;
-    let date = new Date(record.SALES_DATE.value);
+    let date = new Date(record.sale_date.value);
     let month = date.toLocaleString('default', { month: 'short' });
-    record.Drop_down_2.value = financialYear(date);
-    record.Drop_down_3.value = quarter(date.getMonth() + 1);
-    record.EXCHANGERATE.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
+    record.financial_year.value = financialYear(date);
+    record.quarter.value = quarter(date.getMonth() + 1);
+    record.exchange_rate.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
     return event;
   });
 
   const probilityChangeEvents: string[] = [
-    'app.record.create.change.Drop_down_1',
-    'app.record.edit.change.Drop_down_1',
-    'app.record.index.edit.change.Drop_down_1',
+    'app.record.create.change.probility',
+    'app.record.edit.change.probility',
+    'app.record.index.edit.change.probility',
   ]
 
   kintone.events.on(probilityChangeEvents, (event) => {
     let record = event.record;
-    record.Drop_down_4.value = PSI(record.Drop_down_1.value);
+    record.psi.value = PSI(record.probility.value);
     return event;
   });
 
@@ -51,10 +51,10 @@ export const event: any = (function () {
     kintone.events.on(regionChangeEvents, (event) => {
     let record = event.record;
     disableConditionFields(record);
-    if (record.Region.value == 'Singapore' && record.SALES_DATE.value) {
-      let date = new Date(record.SALES_DATE.value);
+    if (record.Region.value == 'Singapore' && record.sale_date.value) {
+      let date = new Date(record.sale_date.value);
       let month = date.toLocaleString('default', { month: 'short' });
-      record.EXCHANGERATE.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
+      record.exchange_rate.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
     }
     return event;
   });
@@ -70,7 +70,7 @@ export const event: any = (function () {
     var record = event.record;
     disableField(record, disableFields);
     disableConditionFields(record);
-    record.Drop_down_4.value = PSI(record.Drop_down_1.value);
+    record.psi.value = PSI(record.probility.value);
     return event;
   });
 
@@ -96,14 +96,14 @@ export const event: any = (function () {
 
   kintone.events.on(submitEvents, function (event) {
     let record = event.record;
-    let date = new Date(record.SALES_DATE.value);
+    let date = new Date(record.sale_date.value);
     let month = date.toLocaleString('default', { month: 'short' });
-    record.Drop_down_2.value = financialYear(date);
-    record.Drop_down_3.value = quarter(date.getMonth() + 1);
-    record.EXCHANGERATE.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
-    if (!record.EXCHANGERATE.value && record.Region.value === 'Singapore') {
+    record.financial_year.value = financialYear(date);
+    record.quarter.value = quarter(date.getMonth() + 1);
+    record.exchange_rate.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
+    if (!record.exchange_rate.value && record.Region.value === 'Singapore') {
       event.error = 'Exchange Rate is required';
-      record.EXCHANGERATE.error = 'Please update record in Exchange Rate app';
+      record.exchange_rate.error = 'Please update record in Exchange Rate app';
     }
     return event;
   });

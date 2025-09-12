@@ -74,19 +74,19 @@ export const PSI = (probility: string): string => {
 }
 
 export const disableFields: string[] = [
-  'Drop_down_2',
-  'Drop_down_3',
-  'Drop_down_4',
-  'EXCHANGERATE',
+  'financial_year',
+  'quarter',
+  'psi',
+  'exchange_rate',
 ]
 
 export const currencyUSDFields: string[] = [
-  'USDUNITPRICE',
+  'unit_price_in_USD',
 ]
 
 export const currencySGDFileds: string[] = [
-  'SGDUNITPRICE',
-  'EXCHANGERATE',
+  'unit_price_in_SGD',
+  'exchange_rate',
 ]
 
 export const disableCurrencyField = (record: KintoneRecord): void => {
@@ -104,17 +104,17 @@ export const disableConditionFields = (record: KintoneRecord): void => {
     currencySGDFileds.forEach(field => {
       field_shown(field, false);
     });
-    record.SGDUNITPRICE.value = '';
+    record.unit_price_in_SGD.value = '';
     enableField(record, currencyUSDFields);
     currencyUSDFields.forEach(field => {
       field_shown(field, true);
     });
   } else {
-    enableField(record, ['SGDUNITPRICE']);
+    enableField(record, ['unit_price_in_SGD']);
     currencySGDFileds.forEach(field => {
       field_shown(field, true);
     });
-    record.USDUNITPRICE.value = '';
+    record.unit_price_in_USD.value = '';
     disableField(record, currencyUSDFields);
     currencyUSDFields.forEach(field => {
       field_shown(field, false);

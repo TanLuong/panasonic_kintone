@@ -4,9 +4,11 @@
     "typescript": "^5.9.2"
   },
   "scripts": {
-    "build-project-list-dev": "esbuild src/project-list-RHQ/index.ts --bundle --outfile=dist/project_list_index_dev.js --sourcemap && rsync -avrz --delete dist/project_list_index_dev.js ~/Dropbox/panasonic_kintone/dev && cp dist/index.css ~/Dropbox/panasonic_kintone",
-    "build-project-list-prod": "esbuild src/project-list-RHQ/index.ts --bundle --minify --outfile=dist/project_list_index_prod.js && rsync -avrz --delete dist/project_list_index_prod.js ~/Dropbox/panasonic_kintone/prod",
-    "build-exchange-rate-dev": "esbuild src/exchange-rate/index.ts --bundle --outfile=dist/exchange_rate_index_dev.js --sourcemap && rsync -avrz --delete dist/exchange_rate_index_dev.js ~/Dropbox/panasonic_kintone/dev"
+    "build-project-list-dev": "node build.js src/project-list-RHQ/index.ts dist/project_list_index_dev.js && rsync -avrz dist/project_list_index_dev.js ~/Dropbox/panasonic_kintone/dev && cp dist/index.css ~/Dropbox/panasonic_kintone",
+    "build-project-list-prod": "node build.js src/project-list-RHQ/index.ts dist/project_list_index_prod.js --prod && rsync -avrz dist/project_list_index_prod.js ~/Dropbox/panasonic_kintone/prod",
+    "build-exchange-rate-dev": "node build.js src/exchange-rate/index.ts dist/exchange_rate_index_dev.js && rsync -avrz  dist/exchange_rate_index_dev.js ~/Dropbox/panasonic_kintone/dev",
+    "build-exchange-rate-prod": "node build.js src/exchange-rate/index.ts dist/exchange_rate_index_prd.js --prod && rsync -avrz  dist/exchange_rate_index_prod.js ~/Dropbox/panasonic_kintone/prod",
+    "build-report-dev": "node build.js src/report/index.ts dist/report_index_dev.js"
   },
   "dependencies": {
     "sweetalert2": "^11.22.5"
