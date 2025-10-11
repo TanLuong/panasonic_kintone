@@ -1,178 +1,203 @@
-import {
-    financialYear,
-    quarter,
-    disableField,
-    disableConditionFields,
-    disableFields,
-    PSI,
-    getExchangeRate,
-    disableCurrencyField,
-} from './constant';
+import { quarter, PSI, disableField, financialYear } from './function';
 
-import Swal from 'sweetalert2';
+declare const kintone: any
+declare const EXCHANGE_APP_ID: number
+interface ExchangeRateRecord {
+  rate: { value: string };
+  year: { value: string };
+  month: { value: string };
+}
 
-declare const kintone: any;
+interface ExchangeRateMap {
+  [key: string]: string;
+}
 
-(function () {
+(() => {
   ('use strict');
 
-  let exchangeRateDictionary = {};
+  // set up field name
+  const probability = 'probability';
+  const region = 'region';
+  const tableField = 'table';
+  const quarterInTable = 'quarter_t';
+  const noInTable = 'No_t';
+  const saleMonthTable = 'sale_month_year_t';
+  const saleDateTable = 'sale_date_t';
+  const SGDPrice = 'sgd_price_t';
+  const USDPrice = 'usd_price_t';
+  const exchangeRateInTable = 'exchange_rate_t';
+  const currencyInTable = 'currency_t';
+  const financialYearInTable = 'financial_year_t'
 
-  const saleDateChangeEvents: string[] = [
-    'app.record.create.change.sale_date',
-    'app.record.edit.change.sale_date',
-    'app.record.index.edit.change.sale_date',
-    'mobile.app.record.create.change.sale_date',
-    'mobile.app.record.edit.change.sale_date',
+
+  const disbleTableFields: string[] = [
+    quarterInTable,
+    noInTable,
+    saleMonthTable,
+    exchangeRateInTable,
+    currencyInTable,
+    financialYearInTable
   ]
 
-  kintone.events.on(saleDateChangeEvents, (event) => {
+  const disableFields: string[] = [
+    'financial_year',
+    'quarter',
+    'psi',
+  ]
+
+  const saleDateChangeEvents: string[] = [
+    `app.record.create.change.${saleDateTable}`,
+    `app.record.edit.change.${saleDateTable}`,
+    `app.record.index.edit.change.${saleDateTable}`,
+  ];
+
+  kintone.events.on(saleDateChangeEvents, (event: any) => {
     let record = event.record;
-    if (record.sale_date.value != '') {
-      let date = new Date(record.sale_date.value);
-      let month = date.toLocaleString('en-US', { month: 'short' });
-      record.financial_year.value = financialYear(date);
-      record.quarter.value = quarter(date.getMonth() + 1);
-      record.exchange_rate.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
-    } else {
-      record.financial_year.value = '';
-      record.quarter.value = '';
-      record.exchange_rate.value = '';
+
+    // Update quarter belong sale date
+    let numberRow = record[tableField].value.length;
+    for (let i = 0; i < numberRow; i++) {
+      let saleDate = new Date(record[tableField].value[i].value[saleDateTable].value)
+      record[tableField].value[i].value[quarterInTable].value = quarter(saleDate.getMonth() + 1);
+      record[tableField].value[i].value[financialYearInTable].value = financialYear(saleDate)
     }
     return event;
   });
 
   const probilityChangeEvents: string[] = [
-    'app.record.create.change.probility',
-    'app.record.edit.change.probility',
-    'app.record.index.edit.change.probility',
-    'mobile.app.record.create.change.probility',
-    'mobile.app.record.edit.change.probility',
+    `app.record.create.change.${probability}`,
+    `app.record.edit.change.${probability}`,
+    `app.record.index.edit.change.${probability}`,
   ]
 
-  kintone.events.on(probilityChangeEvents, (event) => {
+  kintone.events.on(probilityChangeEvents, (event: any) => {
     let record = event.record;
-    record.psi.value = PSI(record.probility.value);
-    return event;
-  });
-
-  const currencyChangeEvents: string[] = [
-    'app.record.create.change.currency',
-    'app.record.edit.change.currency',
-    'app.record.index.edit.change.currency',
-    'mobile.app.record.create.change.currency',
-    'mobile.app.record.edit.change.currency',
-  ]
-    kintone.events.on(currencyChangeEvents, (event) => {
-    let record = event.record;
-    disableConditionFields(record);
-    if (record.currency.value == 'SGD' && record.sale_date.value) {
-      let date = new Date(record.sale_date.value);
-      let month = date.toLocaleString('en-US', { month: 'short' });
-      record.exchange_rate.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
-      console.log('rate:', record.exchange_rate.value);
-    }
+    record.psi.value = PSI(record.probability.value);
     return event;
   });
 
   const regionChangeEvents: string[] = [
-    'app.record.create.change.Region',
-    'app.record.edit.change.Region',
-    'app.record.index.edit.change.Region',
-    'mobile.app.record.create.change.Region',
-    'mobile.app.record.edit.change.Region',
+    `app.record.create.change.${region}`,
+    `app.record.edit.change.${region}`,
+    `app.record.index.edit.change.${region}`,
   ]
-    kintone.events.on(regionChangeEvents, (event) => {
+  kintone.events.on(regionChangeEvents, (event: any) => {
     let record = event.record;
-    disableCurrencyField(record);
+
+    // Disable table fields and set up value in table
+    let numberRow = record[tableField].value.length;
+    for (let i = 0; i < numberRow; i++) {
+      if (record[region].value == "Singapore") {
+        record[tableField].value[i].value[currencyInTable].value = "SGD"
+        record[tableField].value[i].value[USDPrice].disabled = true
+        record[tableField].value[i].value[SGDPrice].disabled = false
+      }
+      else {
+        record[tableField].value[i].value[currencyInTable].value = "USD"
+        record[tableField].value[i].value[USDPrice].disabled = false
+        record[tableField].value[i].value[SGDPrice].disabled = true
+      }
+    }
+
     return event;
   });
-  
+
+
+  // initial edit show
   const showEvents: string[] = [
     'app.record.create.show',
     'app.record.edit.show',
     'app.record.index.edit.show',
     'app.record.detail.show',
-    'mobile.app.detail.show',
-    'mobile.app.record.create.show',
-    'mobile.app.record.edit.show',
+    `app.record.edit.change.${tableField}`,
+    `app.record.create.change.${tableField}`,
+    `app.record.index.edit.change.${tableField}`,
   ]
 
-  kintone.events.on(showEvents, function (event) {
+  kintone.events.on(showEvents, function (event: any) {
     var record = event.record;
     disableField(record, disableFields);
-    disableConditionFields(record);
-    disableCurrencyField(record);
-    record.psi.value = PSI(record.probility.value);
-    return event;
-  });
+    record.psi.value = PSI(record.probability.value);
 
-  const initShowEvents: string[] = [
-    'app.record.create.show',
-    'app.record.edit.show',
-    'app.record.index.show',
-    'mobile.app.record.index.show',
-    'mobile.app.record.create.show',
-    'mobile.app.record.edit.show',
-  ]
+    // Disable table fields and set up value in table
+    let numberRow = record[tableField].value.length;
+    for (let i = 0; i < numberRow; i++) {
+      disbleTableFields.forEach(e => record[tableField].value[i].value[e].disabled = true)
+      let rowDate = new Date(record[tableField].value[i].value[saleDateTable].value);
+      record[tableField].value[i].value[quarterInTable].value = quarter(rowDate.getMonth() + 1);
+      record[tableField].value[i].value[financialYearInTable].value = financialYear(rowDate);
 
-  kintone.events.on(initShowEvents, function (event) {
-    return getExchangeRate()
-      .then((exchangeRate) => {
-        exchangeRateDictionary = exchangeRate;
-        return event;
-      });
-  });
-
-  const submitEvents: string[] = [
-    'app.record.create.submit',
-    'app.record.edit.submit',
-    'app.record.index.edit.submit',
-    'mobile.app.record.create.submit',
-    'mobile.app.record.edit.submit',
-  ]
-
-  kintone.events.on(submitEvents, function (event) {
-    let record = event.record;
-    if (record.sale_date.value != '') {
-      let date = new Date(record.sale_date.value);
-      let month = date.toLocaleString('en-US', { month: 'short' });
-      record.financial_year.value = financialYear(date);
-      record.quarter.value = quarter(date.getMonth() + 1);
-      record.exchange_rate.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
-      if (!record.unit_price_in_SGD.value && !record.unit_price_in_USD.value) {
-        event.error = 'Unit Price is required, please enter value for one of currency';
+      if (record[region].value == "Singapore") {
+        record[tableField].value[i].value[currencyInTable].value = "SGD"
+        record[tableField].value[i].value[USDPrice].disabled = true
+        record[tableField].value[i].value[SGDPrice].disabled = false
+      }
+      else {
+        record[tableField].value[i].value[currencyInTable].value = "USD"
+        record[tableField].value[i].value[USDPrice].disabled = false
+        record[tableField].value[i].value[SGDPrice].disabled = true
+        record[tableField].value[i].value[exchangeRateInTable].value = 0
       }
     }
     return event;
   });
 
-  const successEvents: string[] = [
-    'app.record.create.submit.success',
-    'app.record.edit.submit.success',
-    'app.record.index.edit.submit.success',
-    'mobile.app.record.create.submit.success',
-    'mobile.app.record.edit.submit.success',
+
+  const submitEvents: string[] = [
+    'app.record.create.submit',
+    'app.record.edit.submit',
+    'app.record.index.edit.submit',
   ]
 
-  kintone.events.on(successEvents, function (event) {
+  kintone.events.on(submitEvents, function (event: any) {
     let record = event.record;
-    if (!record) return event;
-    let date = new Date(record.sale_date.value);
-    let month = date.toLocaleString('en-US', { month: 'short' });
-    record.financial_year.value = financialYear(date);
-    record.quarter.value = quarter(date.getMonth() + 1);
-    record.exchange_rate.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
-    if (!record.exchange_rate.value && record.currency.value === 'SGD') {
-      return Swal.fire({
-        icon: 'warning',
-        title: 'Missing Exchange Rate',
-        text: `USD Total Price will be 0.00 USD.`,
-      }).then((result) => {
-        return event;
-      });
-    }
-    return event;
-  });
+    // autofill in table
+    let numberRow = record[tableField].value.length;
+    let query = [];
+    for (let i = 0; i < numberRow; i++) {
+      // fill No
+      record[tableField].value[i].value[noInTable].value = i + 1;
+      // fill quarter
+      let rowDate = new Date(record[tableField].value[i].value[saleDateTable].value);
+      record[tableField].value[i].value[quarterInTable].value = quarter(rowDate.getMonth() + 1);
+      record[tableField].value[i].value[financialYearInTable].value = financialYear(rowDate);
 
+      // create query
+      let month = rowDate.toLocaleString('en-US', { month: 'short' });
+      let year = rowDate.getFullYear();
+      query.push(`(year = "${year}" and month in ("${month}"))`)
+    }
+
+    if (query.length === 0) return event
+    const body = {
+      app: EXCHANGE_APP_ID,
+      query: query.join(' or '),
+      fields: ['rate', 'year', 'month'],
+    }
+    return kintone.api(kintone.api.url('/k/v1/records.json', true), 'GET', body)
+      .then(function (resp: { records: ExchangeRateRecord[] }) {
+        if (resp.records.length === 0) {
+          return {}; // No exchange rate found for the specified date
+        }
+        const records = resp.records;
+        const exchangeRate = records.reduce((acc: ExchangeRateMap, rec: ExchangeRateRecord) => {
+          const key = `${rec.month.value}${rec.year.value}`;
+          acc[key] = rec.rate.value;
+          return acc;
+        }, {});
+
+        // update Exchange Rate
+        for (let i = 0; i < numberRow; i++) {
+          let rowDate = new Date(record[tableField].value[i].value[saleDateTable].value);
+          let month = rowDate.toLocaleString('en-US', { month: 'short' });
+          let year = rowDate.getFullYear();
+          record[tableField].value[i].value[exchangeRateInTable].value = exchangeRate[`${month}${year}`]
+        }
+        return event;
+      })
+      .catch(function (error: any) {
+        console.error('Error fetching exchange rate:', error);
+        return {}; // Error fetching exchange rate
+      });
+  });
 })();

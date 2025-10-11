@@ -1,5 +1,5 @@
 import Swal from "sweetalert2";
-export const PROJECT_LIST_APP_ID = 9;
+export const PROJECT_LIST_APP_ID = 32;
 
 
 declare const kintone: any;

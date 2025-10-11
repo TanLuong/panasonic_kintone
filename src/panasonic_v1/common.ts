@@ -39,7 +39,7 @@ export const event: any = (function () {
 
   kintone.events.on(probilityChangeEvents, (event) => {
     let record = event.record;
-    record.psi.value = PSI(record.probility.value);
+    record.psi.value = PSI(record.probability.value);
     return event;
   });
 
@@ -70,7 +70,7 @@ export const event: any = (function () {
     var record = event.record;
     disableField(record, disableFields);
     disableConditionFields(record);
-    record.psi.value = PSI(record.probility.value);
+    record.psi.value = PSI(record.probability.value);
     return event;
   });
 

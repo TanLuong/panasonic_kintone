@@ -1,16 +1,21 @@
 {
   "devDependencies": {
+    "@types/node": "^24.7.1",
     "esbuild": "0.25.9",
     "typescript": "^5.9.2"
   },
   "scripts": {
-    "build-project-list-dev": "node build.js src/project-list-RHQ/index.ts dist/project_list_index_dev.js && rsync -avrz dist/project_list_index_dev.js ~/Dropbox/panasonic_kintone/dev && cp dist/index.css ~/Dropbox/panasonic_kintone",
-    "build-project-list-prod": "node build.js src/project-list-RHQ/index.ts dist/project_list_index_prod.js --prod && rsync -avrz dist/project_list_index_prod.js ~/Dropbox/panasonic_kintone/prod",
-    "build-exchange-rate-dev": "node build.js src/exchange-rate/index.ts dist/exchange_rate_index_dev.js && rsync -avrz  dist/exchange_rate_index_dev.js ~/Dropbox/panasonic_kintone/dev",
-    "build-exchange-rate-prod": "node build.js src/exchange-rate/index.ts dist/exchange_rate_index_prd.js --prod && rsync -avrz  dist/exchange_rate_index_prod.js ~/Dropbox/panasonic_kintone/prod",
-    "build-report-dev": "node build.js src/report/index.ts dist/report_index_dev.js"
+    "build-project-list-RHQ-dev": "node build.js src/project-list-RHQ/index.ts",
+    "build-project-list-RHQ-prod": "node build.js src/project-list-RHQ/index.ts --prod",
+    "build-exchange-rate-dev": "node build.js src/exchange-rate/index.ts",
+    "build-exchange-rate-prod": "node build.js src/exchange-rate/index.ts",
+    "build-report-dev": "node build.js src/report/index.ts",
+    "build-project-list-common": "node build.js src/project-list-common/index.ts"
   },
   "dependencies": {
-    "sweetalert2": "^11.22.5"
+    "dotenv": "^17.2.3",
+    "kintone-ui-component": "^1.22.0",
+    "sweetalert2": "^11.22.5",
+    "zod": "^4.1.12"
   }
 }
