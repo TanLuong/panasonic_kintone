@@ -1,6 +1,8 @@
 {
   "devDependencies": {
     "@types/node": "^24.7.1",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
     "esbuild": "0.25.9",
     "typescript": "^5.9.2"
   },
@@ -15,6 +17,8 @@
   "dependencies": {
     "dotenv": "^17.2.3",
     "kintone-ui-component": "^1.22.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "sweetalert2": "^11.22.5",
     "zod": "^4.1.12"
   }

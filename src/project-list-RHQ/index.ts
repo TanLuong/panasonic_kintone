@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 import { quarter, PSI, disableField, financialYear } from './function';
 
 declare const kintone: any
@@ -40,8 +42,8 @@ interface ExchangeRateMap {
   ]
 
   const disableFields: string[] = [
-    'financial_year',
-    'quarter',
+    // 'financial_year',
+    // 'quarter',
     'psi',
   ]
 
@@ -199,5 +201,38 @@ interface ExchangeRateMap {
         console.error('Error fetching exchange rate:', error);
         return {}; // Error fetching exchange rate
       });
+  });
+
+    const submitSuccessEvents: string[] = [
+    'app.record.create.submit.success',
+    'app.record.edit.submit.success',
+    'app.record.index.edit.submit.success',
+  ]
+
+  kintone.events.on(submitSuccessEvents, function (event: any) {
+    let record = event.record;
+
+    // notification if exchange rate empty
+    let messages: string[] = []
+    let numberRow = record[tableField].value.length;
+    for (let i = 0; i < numberRow; i++) {
+      if (
+        record[tableField].value[i].value[currencyInTable].value != "USD" && 
+        record[tableField].value[i].value[exchangeRateInTable].value == 0
+      ) {
+          let rowDate = new Date(record[tableField].value[i].value[saleDateTable].value);
+          let month = rowDate.toLocaleString('en-US', { month: 'short' });
+          let year = rowDate.getFullYear();
+          messages.push(`${month}-${year}`)
+      }
+    }
+    if (messages.length > 0) {
+      Swal.fire({
+        title: 'Exchange Rate is empty',
+        text: `Please set exchange rate for months: ${messages.join(', ')}.`,
+        icon: 'warning'
+      })
+    }
+    return event;
   });
 })();

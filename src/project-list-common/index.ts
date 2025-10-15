@@ -1,4 +1,4 @@
-
+declare const kintone: any
 
 (function () {
   ('use strict');
@@ -74,13 +74,13 @@
     const tableField = 'table';
     const quarterInTable = 'quarter_t';
     const noInTable = 'No_t';
-    const saleMonthTable = 'sale_month_year_t';
+    // const saleMonthTable = 'sale_month_year_t';
     const saleDateTable = 'sale_date_t';
 
     const disbleTableFields: string[] = [
         quarterInTable,
         noInTable,
-        saleMonthTable,
+        // saleMonthTable,
     ]
 
     
@@ -121,29 +121,49 @@
     return event;
   });
 
+  const saleDateTableChangeEvents: string[] = [
+    `app.record.create.change.${saleDateTable}`,
+    `app.record.edit.change.${saleDateTable}`,
+    `app.record.index.edit.change.${saleDateTable}`,
+  ];
+
+  kintone.events.on(saleDateTableChangeEvents, (event: any) => {
+    let record = event.record;
+
+    // Update quarter belong sale date
+    let numberRow = record[tableField].value.length;
+    for (let i = 0; i < numberRow; i++) {
+      let saleDate = new Date(record[tableField].value[i].value[saleDateTable].value)
+      record[tableField].value[i].value[quarterInTable].value = quarter(saleDate.getMonth() + 1);
+    }
+    return event;
+  });
 
 
 
   
+  // initial edit show
   const showEvents: string[] = [
     'app.record.create.show',
     'app.record.edit.show',
     'app.record.index.edit.show',
     'app.record.detail.show',
-    'mobile.app.detail.show',
-    'mobile.app.record.create.show',
-    'mobile.app.record.edit.show',
+    `app.record.edit.change.${tableField}`,
+    `app.record.create.change.${tableField}`,
+    `app.record.index.edit.change.${tableField}`,
   ]
 
-  kintone.events.on(showEvents, function (event) {
+  kintone.events.on(showEvents, function (event: any) {
     var record = event.record;
     disableField(record, disableFields);
     record.psi.value = PSI(record.probability.value);
-    
-    // Disable table fields
+
+    // Disable table fields and set up value in table
     let numberRow = record[tableField].value.length;
-    for (let i=0; i < numberRow; i++) {
-        disbleTableFields.forEach(e => record[tableField].value[i].value[e].disabled=true)
+    for (let i = 0; i < numberRow; i++) {
+      disbleTableFields.forEach(e => record[tableField].value[i].value[e].disabled = true)
+      let rowDate = new Date(record[tableField].value[i].value[saleDateTable].value);
+      record[tableField].value[i].value[quarterInTable].value = quarter(rowDate.getMonth() + 1);
     }
     return event;
   });
