@@ -4,7 +4,6 @@ const { basename } = require("path");
 const dotenv = require('dotenv')
 
 
-
 const entry = process.argv[2];
 
 if (entry.split("/").length < 3) {
@@ -13,20 +12,23 @@ if (entry.split("/").length < 3) {
 }
 const outfile = entry.split("/")[1]
 const isProd = process.argv.includes("--prod");
-
-if (isProd) {
-  dotenv.config({path: `./src/${outfile}/.prod.env`})
-} else {
-  dotenv.config({path: `./src/${outfile}/.dev.env`})
-}
-
-
-const { ENV } = require(`./src/${outfile}/constant.ts`)
 const ENV_VARIABLE = {}
 
-for (let i in ENV) {
-  ENV_VARIABLE[i] = process.env[i]
+if (fs.existsSync(`./src/${outfile}/.prod.env`) || fs.existsSync(`./src/${outfile}/.dev.env`) ) {
+  if (isProd) {
+    dotenv.config({path: `./src/${outfile}/.prod.env`})
+  } else {
+    dotenv.config({path: `./src/${outfile}/.dev.env`})
+  }
+
+  const { ENV } = require(`./src/${outfile}/constant.ts`)
+
+  for (let i in ENV) {
+    ENV_VARIABLE[i] = process.env[i]
+  }
 }
+
+console.log('ENV:', ENV_VARIABLE)
 
 
 const buildOptions = {
@@ -49,10 +51,16 @@ const buildOptions = {
   jsx: "automatic",
 };
 
-esbuild.context(buildOptions).then(ctx => {
-  if (!isProd) {
+if (isProd) {
+  // For production: run a single build and exit
+  esbuild.build(buildOptions).then(() => {
+    console.log('Production build completed:', buildOptions.outfile);
+  }).catch(() => process.exit(1));
+} else {
+  // For development: create a context with watch + serve
+  esbuild.context(buildOptions).then(ctx => {
     ctx.watch();
-  
+
     const serveOptions = {
       servedir: '.',
       port: 3000,
@@ -71,5 +79,6 @@ esbuild.context(buildOptions).then(ctx => {
     }
     
     ctx.serve(serveOptions);
-  }
-}).catch(() => process.exit(1));
+    return
+  }).catch(() => process.exit(1));
+}
