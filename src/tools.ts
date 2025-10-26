@@ -2,8 +2,8 @@ declare const kintone: any;
 
 const postCursor = async (_params: {
     app: number | undefined,
-    filterCond: string,
-    sortConds: string[] | [],
+    filterCond?: string,
+    sortConds?: string[],
     fields: string[],
 }) => {
   var MAX_READ_LIMIT = 500;
@@ -80,10 +80,20 @@ const getRecordsByCursorId = async (_params: {
   */
 export const getRecords = async (_params: {
     app: number | undefined,
-    filterCond: string,
-    sortConds: string[],
+    filterCond?: string,
+    sortConds?: string[],
     fields: string[],
 }): Promise<{ records: object[]  } | undefined> => {
   const cursorId = await postCursor(_params)
   return getRecordsByCursorId({id: cursorId})
 };
+
+export const paginateRecords = (records: object[], pageSize: number, pageNumber: number) => {
+    const startIndex = (pageNumber - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    return records.slice(startIndex, endIndex);
+}
+
+export const calculateTotalPages = (totalRecords: number, pageSize: number) => {
+    return Math.ceil(totalRecords / pageSize);
+}

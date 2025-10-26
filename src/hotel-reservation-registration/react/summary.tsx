@@ -40,8 +40,8 @@ export function Summary({
                     <span>総宿泊日数: {night}泊</span>
                     <span>予約売上合計: ¥{amount.toLocaleString('en-US')}</span>
                 </div>
-                <div>部屋タイプ別: {roomTypeTextList.length > 0 ? roomTypeTextList.join(', ') : ''}</div>
-                <div>予約経路別: {reservationChanelList.length > 0 ? reservationChanelList.join(', ') : ''}</div>
+                <div><strong>部屋タイプ別</strong>: {roomTypeTextList.length > 0 ? roomTypeTextList.join(', ') : ''}</div>
+                <div><strong>予約経路別</strong>: {reservationChanelList.length > 0 ? reservationChanelList.join(', ') : ''}</div>
             </div>
         </div>
     )

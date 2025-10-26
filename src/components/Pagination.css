@@ -1,0 +1,51 @@
+.pagination-root{
+  background:#fff;
+  padding:12px 16px;
+  display:flex;
+  flex-direction:column;
+  border-top:1px solid #e5e7eb;
+}
+
+/* Mobile actions visible by default, hidden on wide screens */
+.mobile-actions{ display:flex; justify-content:space-between }
+.mobile-actions .nav-btn{ padding:8px 12px; border:1px solid #d1d5db; background:#fff; color:#374151; border-radius:6px; font-weight:500 }
+.mobile-actions .nav-btn.ml{ margin-left:12px }
+
+/* Desktop layout */
+.desktop-actions{ display:none; align-items:center; justify-content:space-between; width:100%; }
+.pagination-info p{ margin:0; color:#374151; font-size:0.875rem }
+.emphasis{ font-weight:700 }
+
+.page-controls{ display:flex; align-items:center; gap:8px }
+
+/* Page button */
+.page-btn{
+  padding:8px 12px;
+  font-size:0.875rem;
+  font-weight:500;
+  border-radius:6px;
+  border:1px solid #d1d5db;
+  background:#fff;
+  color:#374151;
+  cursor:pointer;
+  transition:background .15s ease, color .15s ease, box-shadow .15s ease;
+}
+.page-btn:hover{ background:#f3f4f6 }
+.page-btn.current{
+  background:#2563eb; /* blue-600 */
+  color:#fff;
+  box-shadow:0 2px 6px rgba(37,99,235,0.2);
+  cursor:default;
+}
+
+.ellipsis{ padding:8px 12px; color:#6b7280 }
+
+/* Disabled state */
+.page-btn[disabled], .nav-btn[disabled]{ opacity:0.5; cursor:not-allowed }
+
+/* Responsive rules */
+@media(min-width:640px){
+  .mobile-actions{ display:none }
+  .desktop-actions{ display:flex }
+  .pagination-root{ flex-direction:row; align-items:center }
+}

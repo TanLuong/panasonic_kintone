@@ -1,0 +1,118 @@
+{
+    "type": "SUBTABLE",
+    "code": "table",
+    "fields": [
+        {
+            "type": "NUMBER",
+            "code": "No_t",
+            "size": {
+                "width": "62"
+            }
+        },
+        {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "product_type_t",
+            "size": {
+                "width": "214"
+            }
+        },
+        {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "model_t",
+            "size": {
+                "width": "246"
+            }
+        },
+        {
+            "type": "DROP_DOWN",
+            "code": "currency_t",
+            "size": {
+                "width": "116"
+            }
+        },
+        {
+            "type": "NUMBER",
+            "code": "quantity_t",
+            "size": {
+                "width": "114"
+            }
+        },
+        {
+            "type": "NUMBER",
+            "code": "sgd_price_t",
+            "size": {
+                "width": "193"
+            }
+        },
+        {
+            "type": "NUMBER",
+            "code": "exchange_rate_t",
+            "size": {
+                "width": "193"
+            }
+        },
+        {
+            "type": "NUMBER",
+            "code": "usd_price_t",
+            "size": {
+                "width": "200"
+            }
+        },
+        {
+            "type": "CALC",
+            "code": "Calculated",
+            "size": {
+                "width": "193"
+            }
+        },
+        {
+            "type": "DATE",
+            "code": "sale_date_t",
+            "size": {
+                "width": "117"
+            }
+        },
+        {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "financial_year_t",
+            "size": {
+                "width": "193"
+            }
+        },
+        {
+            "type": "DROP_DOWN",
+            "code": "quarter_t",
+            "size": {
+                "width": "116"
+            }
+        },
+        {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "sale_month_year_t",
+            "size": {
+                "width": "163"
+            }
+        },
+        {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "po_no",
+            "size": {
+                "width": "193"
+            }
+        },
+        {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "deal_no",
+            "size": {
+                "width": "193"
+            }
+        },
+        {
+            "type": "DROP_DOWN",
+            "code": "delivary_status",
+            "size": {
+                "width": "132"
+            }
+        }
+    ]
+}

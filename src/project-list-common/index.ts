@@ -10,32 +10,11 @@ declare const kintone: any
     };
     }
 
-
-
-    function field_shown(field: string, status: boolean): void {
-    kintone.app.record.setFieldShown(field, status);
-    }
-
     const disableField = (record: KintoneRecord, fields: string[]): void => {
     for (let field of fields) {
         record[field].disabled = true;
     }
     };
-
-    const enableField = (record: KintoneRecord, fields: string[]): void => {
-    for (let field of fields) {
-        record[field].disabled = false;
-    }
-    };
-
-    function hide_name_field(className: string, text: string): void {
-    const field_name = document.querySelectorAll(`.${className}`);
-    field_name.forEach((element) => {
-        if (element.textContent == text) {
-        (element as HTMLElement).style.display = 'none';
-        }
-    });
-    }
 
     const quarter = (month: number): string => {
     if (month >= 1 && month <= 3) return 'Q4';
@@ -67,7 +46,6 @@ declare const kintone: any
     }
 
     const disableFields: string[] = [
-        'financial_year',
         'psi',
     ]
 
@@ -76,36 +54,14 @@ declare const kintone: any
     const noInTable = 'No_t';
     // const saleMonthTable = 'sale_month_year_t';
     const saleDateTable = 'sale_date_t';
+    const financialYearInTable = 'financial_year_t';
 
     const disbleTableFields: string[] = [
         quarterInTable,
         noInTable,
-        // saleMonthTable,
+        financialYearInTable,
     ]
 
-    
-
-
-  const saleDateChangeEvents: string[] = [
-    'app.record.create.change.sale_date',
-    'app.record.edit.change.sale_date',
-    'app.record.index.edit.change.sale_date',
-    'mobile.app.record.create.change.sale_date',
-    'mobile.app.record.edit.change.sale_date',
-  ]
-
-  kintone.events.on(saleDateChangeEvents, (event: any) => {
-    let record = event.record;
-    if (record.sale_date.value != '') {
-      let date = new Date(record.sale_date.value);
-      record.financial_year.value = financialYear(date);
-      record.quarter.value = quarter(date.getMonth() + 1);
-    } else {
-      record.financial_year.value = '';
-      record.quarter.value = '';
-    }
-    return event;
-  });
 
   const probilityChangeEvents: string[] = [
     'app.record.create.change.probability',
@@ -133,8 +89,9 @@ declare const kintone: any
     // Update quarter belong sale date
     let numberRow = record[tableField].value.length;
     for (let i = 0; i < numberRow; i++) {
-      let saleDate = new Date(record[tableField].value[i].value[saleDateTable].value)
-      record[tableField].value[i].value[quarterInTable].value = quarter(saleDate.getMonth() + 1);
+      let rowDate = new Date(record[tableField].value[i].value[saleDateTable].value)
+      record[tableField].value[i].value[quarterInTable].value = quarter(rowDate.getMonth() + 1);
+      record[tableField].value[i].value[financialYearInTable].value = financialYear(rowDate);
     }
     return event;
   });
@@ -164,6 +121,7 @@ declare const kintone: any
       disbleTableFields.forEach(e => record[tableField].value[i].value[e].disabled = true)
       let rowDate = new Date(record[tableField].value[i].value[saleDateTable].value);
       record[tableField].value[i].value[quarterInTable].value = quarter(rowDate.getMonth() + 1);
+      record[tableField].value[i].value[financialYearInTable].value = financialYear(rowDate);
     }
     return event;
   });
@@ -179,11 +137,7 @@ declare const kintone: any
 
   kintone.events.on(successEvents, function (event) {
     let record = event.record;
-    if (!record) return event;
-    let date = new Date(record.sale_date.value);
-    record.financial_year.value = financialYear(date);
-    record.quarter.value = quarter(date.getMonth() + 1);
-    
+    if (!record) return event;    
     // autofill in table
     let numberRow = record[tableField].value.length;
     for (let i=0; i < numberRow; i++) {
@@ -192,6 +146,7 @@ declare const kintone: any
         // fill quarter
         let rowDate = new Date(record[tableField].value[i].value[saleDateTable].value);
         record[tableField].value[i].value[quarterInTable].value = quarter(rowDate.getMonth() + 1);
+        record[tableField].value[i].value[financialYearInTable].value = financialYear(rowDate);
     }
 
     return event;

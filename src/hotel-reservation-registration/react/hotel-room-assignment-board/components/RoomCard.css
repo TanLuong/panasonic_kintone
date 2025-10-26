@@ -1,0 +1,43 @@
+.room-card{
+  background: #fff;
+  border: 1px solid #e5e7eb; /* light gray */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  display:flex;
+  flex-direction:column;
+  transition: box-shadow .2s ease;
+}
+.room-card:hover{ box-shadow: 0 6px 18px rgba(0,0,0,0.08);} 
+.room-card-header{
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.room-number{ font-size:1.125rem; font-weight:700; color:#1f2937; margin:0 }
+.room-type{ font-size:0.75rem; color:#6b7280; margin:0 }
+.status-badge{
+  padding:4px 10px;
+  font-size:0.75rem;
+  font-weight:700;
+  border-radius:9999px;
+  border:1px solid transparent;
+}
+/* status variants */
+.status-occupied{ background:#ecfdf5; color:#065f46; border-color:#bbf7d0 }
+.status-available{ background:#fff1f2; color:#7f1d1d; border-color:#fecaca }
+.status-cleaning{ background:#fffbeb; color:#92400e; border-color:#fef3c7 }
+
+.room-card-body{ padding:16px; flex-grow:1 }
+.guest-info{ margin-bottom:12px }
+.guest-name{ font-size:1rem; font-weight:700; color:#1f2937; margin:0 }
+.guest-meta{ display:flex; flex-wrap:wrap; gap:12px; font-size:0.875rem; color:#4b5563; margin-top:6px }
+.payment-badge{ display:inline-block; margin-top:8px; padding:2px 8px; font-size:0.75rem; font-weight:600; border-radius:9999px; border:1px solid transparent }
+.payment-prepaid{ background:#eff6ff; color:#1e3a8a; border-color:#bfdbfe }
+.payment-onsite{ background:#fffbeb; color:#92400e; border-color:#fde68a }
+
+.notes{ background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:12px; font-size:0.875rem; color:#374151 }
+.empty-state{ display:flex; align-items:center; justify-content:center; min-height:64px; color:#6b7280; font-style:italic }

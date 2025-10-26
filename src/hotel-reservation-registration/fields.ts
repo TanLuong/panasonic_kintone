@@ -1,0 +1,14 @@
+export const adult = 'adult';
+export const child = 'child';
+export const night = 'night';
+export const price = 'price';
+export const room_type = 'room_type';
+export const reservation_chanel = 'reservation_chanel';
+export const room_number = 'room_number';
+export const memos = 'memos';
+export const customer_memo = 'customer_memo';
+export const internal_memo = 'staff_memo';
+export const customer_name = 'customer_name';
+export const check_in = 'check_in';
+export const check_out = 'check_out';
+export const payment_method = 'payment_method';

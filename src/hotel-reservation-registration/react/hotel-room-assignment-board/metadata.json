@@ -1,0 +1,5 @@
+{
+  "name": "Hotel Room Assignment Board",
+  "description": "A web application to display and manage hotel room assignments with a clean, grid-based interface and pagination.",
+  "requestFramePermissions": []
+}
