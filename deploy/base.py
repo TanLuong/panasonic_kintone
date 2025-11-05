@@ -27,11 +27,11 @@ def fetch_data(url, **kwargs):
     response.raise_for_status()
     return response.json()
 
-app = App(subdomain='development')
+app = App(subdomain='panasonic-ppndap')
 
 if __name__ == '__main__':
-    layout = fetch_data(app.get_form_layout_url(), json={"app": 73})
-    fields = fetch_data(app.get_form_fields_url(), json={"app": 73})
+    layout = fetch_data(app.get_form_layout_url(), json={"app": 252})
+    fields = fetch_data(app.get_form_fields_url(), json={"app": 252})
 
     with open('form-fields/layout.json', 'w', encoding='utf-8') as f:
         json.dump(layout, f, indent=4)

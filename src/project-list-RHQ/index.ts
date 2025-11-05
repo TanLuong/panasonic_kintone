@@ -179,7 +179,7 @@ interface ExchangeRateMap {
     return kintone.api(kintone.api.url('/k/v1/records.json', true), 'GET', body)
       .then(function (resp: { records: ExchangeRateRecord[] }) {
         if (resp.records.length === 0) {
-          return {}; // No exchange rate found for the specified date
+          return event; // No exchange rate found for the specified date
         }
         const records = resp.records;
         const exchangeRate = records.reduce((acc: ExchangeRateMap, rec: ExchangeRateRecord) => {
@@ -199,7 +199,7 @@ interface ExchangeRateMap {
       })
       .catch(function (error: any) {
         console.error('Error fetching exchange rate:', error);
-        return {}; // Error fetching exchange rate
+        return event; // Error fetching exchange rate
       });
   });
 

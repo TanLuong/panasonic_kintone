@@ -45,7 +45,6 @@ df.insert(loc=0, column='New Record Flags', value=[''] * len(df))
 df['No_t'] = ''
 
 
-pd.isna
 project_name = ''
 iter_row = 1
 for index, row in df.iterrows():

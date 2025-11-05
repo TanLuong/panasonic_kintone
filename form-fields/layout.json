@@ -19,19 +19,19 @@
                     "type": "SINGLE_LINE_TEXT",
                     "code": "RECORD_NO",
                     "size": {
-                        "width": "193"
+                        "width": "117"
                     }
                 },
                 {
                     "type": "USER_SELECT",
                     "code": "User_selection",
                     "size": {
-                        "width": "344"
+                        "width": "347"
                     }
                 },
                 {
                     "type": "ORGANIZATION_SELECT",
-                    "code": "Department_selection",
+                    "code": "Department_selection_PPH",
                     "size": {
                         "width": "344"
                     }
@@ -50,23 +50,30 @@
                 },
                 {
                     "type": "DROP_DOWN",
-                    "code": "Region",
+                    "code": "region",
                     "size": {
-                        "width": "196"
+                        "width": "158"
                     }
                 },
                 {
                     "type": "SINGLE_LINE_TEXT",
-                    "code": "Lookup",
+                    "code": "Customer_data_PPH",
                     "size": {
-                        "width": "518"
+                        "width": "381"
                     }
                 },
                 {
                     "type": "SINGLE_LINE_TEXT",
-                    "code": "Text",
+                    "code": "Lookup_0",
                     "size": {
-                        "width": "357"
+                        "width": "361"
+                    }
+                },
+                {
+                    "type": "SINGLE_LINE_TEXT",
+                    "code": "Project_name_PPH",
+                    "size": {
+                        "width": "242"
                     }
                 }
             ]
@@ -76,14 +83,14 @@
             "fields": [
                 {
                     "type": "DROP_DOWN",
-                    "code": "Industry",
+                    "code": "Industry_PPH",
                     "size": {
                         "width": "196"
                     }
                 },
                 {
                     "type": "DROP_DOWN",
-                    "code": "Drop_down",
+                    "code": "Runrate_PPH",
                     "size": {
                         "width": "196"
                     }
@@ -118,82 +125,23 @@
             "fields": [
                 {
                     "type": "DROP_DOWN",
-                    "code": "Drop_down_0",
+                    "code": "Status_PPH",
                     "size": {
-                        "width": "196"
+                        "width": "171"
                     }
                 },
                 {
                     "type": "DROP_DOWN",
                     "code": "probability",
                     "size": {
-                        "width": "196"
-                    }
-                }
-            ]
-        },
-        {
-            "type": "ROW",
-            "fields": [
-                {
-                    "type": "DATE",
-                    "code": "sale_date",
-                    "size": {
-                        "width": "117"
-                    }
-                },
-                {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "financial_year",
-                    "size": {
-                        "width": "193"
-                    }
-                },
-                {
-                    "type": "DROP_DOWN",
-                    "code": "quarter",
-                    "size": {
-                        "width": "196"
+                        "width": "150"
                     }
                 },
                 {
                     "type": "DROP_DOWN",
                     "code": "psi",
                     "size": {
-                        "width": "196"
-                    }
-                },
-                {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "sale_month",
-                    "size": {
-                        "width": "193"
-                    }
-                }
-            ]
-        },
-        {
-            "type": "ROW",
-            "fields": [
-                {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "Text_2",
-                    "size": {
-                        "width": "193"
-                    }
-                },
-                {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "Text_3",
-                    "size": {
-                        "width": "193"
-                    }
-                },
-                {
-                    "type": "DROP_DOWN",
-                    "code": "Delivery_Status",
-                    "size": {
-                        "width": "196"
+                        "width": "143"
                     }
                 }
             ]
@@ -222,76 +170,109 @@
             ]
         },
         {
-            "type": "ROW",
-            "fields": [
-                {
-                    "type": "DROP_DOWN",
-                    "code": "product_type",
-                    "size": {
-                        "width": "196"
-                    }
-                },
-                {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "Lookup_1",
-                    "size": {
-                        "width": "386"
-                    }
-                }
-            ]
+    "type": "SUBTABLE",
+    "code": "table",
+    "fields": [
+        {
+            "type": "NUMBER",
+            "code": "No_t",
+            "size": {
+                "width": "62"
+            }
         },
         {
-            "type": "ROW",
-            "fields": [
-                {
-                    "type": "DROP_DOWN",
-                    "code": "currency",
-                    "size": {
-                        "width": "196"
-                    }
-                }
-            ]
+            "type": "SINGLE_LINE_TEXT",
+            "code": "product_type_t",
+            "size": {
+                "width": "214"
+            }
         },
         {
-            "type": "ROW",
-            "fields": [
-                {
-                    "type": "NUMBER",
-                    "code": "unit_price_in_SGD",
-                    "size": {
-                        "width": "196"
-                    }
-                },
-                {
-                    "type": "NUMBER",
-                    "code": "unit_price_in_USD",
-                    "size": {
-                        "width": "196"
-                    }
-                },
-                {
-                    "type": "NUMBER",
-                    "code": "quantity",
-                    "size": {
-                        "width": "193"
-                    }
-                },
-                {
-                    "type": "NUMBER",
-                    "code": "exchange_rate",
-                    "size": {
-                        "width": "193"
-                    }
-                },
-                {
-                    "type": "CALC",
-                    "code": "total_USD",
-                    "size": {
-                        "width": "193"
-                    }
-                }
-            ]
+            "type": "SINGLE_LINE_TEXT",
+            "code": "model_t",
+            "size": {
+                "width": "246"
+            }
         },
+        {
+            "type": "DROP_DOWN",
+            "code": "currency_t",
+            "size": {
+                "width": "116"
+            }
+        },
+        {
+            "type": "NUMBER",
+            "code": "quantity_t",
+            "size": {
+                "width": "114"
+            }
+        },
+        {
+            "type": "NUMBER",
+            "code": "usd_price_t",
+            "size": {
+                "width": "200"
+            }
+        },
+        {
+            "type": "CALC",
+            "code": "Calculated",
+            "size": {
+                "width": "193"
+            }
+        },
+        {
+            "type": "DATE",
+            "code": "sale_date_t",
+            "size": {
+                "width": "117"
+            }
+        },
+        {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "financial_year_t",
+            "size": {
+                "width": "193"
+            }
+        },
+        {
+            "type": "DROP_DOWN",
+            "code": "quarter_t",
+            "size": {
+                "width": "116"
+            }
+        },
+        {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "sale_month_year_t",
+            "size": {
+                "width": "163"
+            }
+        },
+        {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "po_no",
+            "size": {
+                "width": "193"
+            }
+        },
+        {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "deal_no",
+            "size": {
+                "width": "193"
+            }
+        },
+        {
+            "type": "DROP_DOWN",
+            "code": "delivary_status",
+            "size": {
+                "width": "132"
+            }
+        }
+    ]
+},
         {
             "type": "ROW",
             "fields": [
@@ -319,6 +300,44 @@
                     "code": "Attachment",
                     "size": {
                         "width": "207"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "USER_SELECT",
+                    "code": "Purchase_approvalPPH_0",
+                    "size": {
+                        "width": "344"
+                    }
+                },
+                {
+                    "type": "CHECK_BOX",
+                    "code": "Purchase_stock_approvalPPH_0",
+                    "size": {
+                        "width": "282"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "USER_SELECT",
+                    "code": "Purchase_approvalPPH",
+                    "size": {
+                        "width": "344"
+                    }
+                },
+                {
+                    "type": "CHECK_BOX",
+                    "code": "Purchase_stock_approvalPPH",
+                    "size": {
+                        "width": "282"
                     }
                 }
             ]
@@ -371,124 +390,6 @@
                     "code": "Updated_by",
                     "size": {
                         "width": "136"
-                    }
-                }
-            ]
-        },
-        {
-            "type": "SUBTABLE",
-            "code": "table",
-            "fields": [
-                {
-                    "type": "NUMBER",
-                    "code": "No_t",
-                    "size": {
-                        "width": "62"
-                    }
-                },
-                {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "product_type_t",
-                    "size": {
-                        "width": "214"
-                    }
-                },
-                {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "model_t",
-                    "size": {
-                        "width": "246"
-                    }
-                },
-                {
-                    "type": "DROP_DOWN",
-                    "code": "currency_t",
-                    "size": {
-                        "width": "116"
-                    }
-                },
-                {
-                    "type": "NUMBER",
-                    "code": "quantity_t",
-                    "size": {
-                        "width": "114"
-                    }
-                },
-                {
-                    "type": "NUMBER",
-                    "code": "sgd_price_t",
-                    "size": {
-                        "width": "193"
-                    }
-                },
-                {
-                    "type": "NUMBER",
-                    "code": "exchange_rate_t",
-                    "size": {
-                        "width": "193"
-                    }
-                },
-                {
-                    "type": "NUMBER",
-                    "code": "usd_price_t",
-                    "size": {
-                        "width": "200"
-                    }
-                },
-                {
-                    "type": "CALC",
-                    "code": "Calculated",
-                    "size": {
-                        "width": "193"
-                    }
-                },
-                {
-                    "type": "DATE",
-                    "code": "sale_date_t",
-                    "size": {
-                        "width": "117"
-                    }
-                },
-                {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "financial_year_t",
-                    "size": {
-                        "width": "193"
-                    }
-                },
-                {
-                    "type": "DROP_DOWN",
-                    "code": "quarter_t",
-                    "size": {
-                        "width": "116"
-                    }
-                },
-                {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "sale_month_year_t",
-                    "size": {
-                        "width": "163"
-                    }
-                },
-                {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "po_no",
-                    "size": {
-                        "width": "193"
-                    }
-                },
-                {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "deal_no",
-                    "size": {
-                        "width": "193"
-                    }
-                },
-                {
-                    "type": "DROP_DOWN",
-                    "code": "delivary_status",
-                    "size": {
-                        "width": "132"
                     }
                 }
             ]

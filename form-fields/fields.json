@@ -1,80 +1,9 @@
 {
-    "revision": "21",
+    "revision": "209",
     "properties": {
-        "psi": {
+        "Status_PPH": {
             "type": "DROP_DOWN",
-            "code": "psi",
-            "label": "PSI",
-            "noLabel": false,
-            "required": true,
-            "options": {
-                "IN": {
-                    "label": "IN",
-                    "index": "0"
-                },
-                "LOST": {
-                    "label": "LOST",
-                    "index": "2"
-                },
-                "OUT": {
-                    "label": "OUT",
-                    "index": "1"
-                }
-            },
-            "defaultValue": ""
-        },
-        "Delivery_Status": {
-            "type": "DROP_DOWN",
-            "code": "Delivery_Status",
-            "label": "Delivery Status",
-            "noLabel": false,
-            "required": false,
-            "options": {
-                "Partial": {
-                    "label": "Partial",
-                    "index": "1"
-                },
-                "Completed": {
-                    "label": "Completed",
-                    "index": "2"
-                },
-                "Pending": {
-                    "label": "Pending",
-                    "index": "0"
-                }
-            },
-            "defaultValue": ""
-        },
-        "financial_year": {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "financial_year",
-            "label": "FINANCIAL YEAR",
-            "noLabel": false,
-            "required": true,
-            "minLength": "",
-            "maxLength": "",
-            "expression": "",
-            "hideExpression": false,
-            "unique": false,
-            "defaultValue": ""
-        },
-        "Attachment": {
-            "type": "FILE",
-            "code": "Attachment",
-            "label": "Attachment",
-            "noLabel": false,
-            "required": false,
-            "thumbnailSize": "150"
-        },
-        "Updated_by": {
-            "type": "MODIFIER",
-            "code": "Updated_by",
-            "label": "Updated by",
-            "noLabel": false
-        },
-        "Drop_down_0": {
-            "type": "DROP_DOWN",
-            "code": "Drop_down_0",
+            "code": "Status_PPH",
             "label": "Status",
             "noLabel": false,
             "required": false,
@@ -102,114 +31,45 @@
             },
             "defaultValue": ""
         },
-        "Industry": {
+        "psi": {
             "type": "DROP_DOWN",
-            "code": "Industry",
-            "label": "Industry",
+            "code": "psi",
+            "label": "PSI",
             "noLabel": false,
             "required": true,
             "options": {
-                "Tourism": {
-                    "label": "Tourism",
-                    "index": "7"
+                "IN": {
+                    "label": "IN",
+                    "index": "0"
                 },
-                "Others": {
-                    "label": "Others",
-                    "index": "8"
-                },
-                "Entertainment": {
-                    "label": "Entertainment",
+                "LOST": {
+                    "label": "LOST",
                     "index": "2"
                 },
-                "Rental": {
-                    "label": "Rental",
-                    "index": "6"
-                },
-                "Education": {
-                    "label": "Education",
+                "OUT": {
+                    "label": "OUT",
                     "index": "1"
-                },
-                "Government": {
-                    "label": "Government",
-                    "index": "3"
-                },
-                "Corporate": {
-                    "label": "Corporate",
-                    "index": "0"
-                },
-                "Museum / Gallery": {
-                    "label": "Museum / Gallery",
-                    "index": "5"
-                },
-                "House of Worship": {
-                    "label": "House of Worship",
-                    "index": "4"
                 }
             },
             "defaultValue": ""
         },
-        "Created_datetime": {
-            "type": "CREATED_TIME",
-            "code": "Created_datetime",
-            "label": "Created datetime",
-            "noLabel": false
-        },
-        "sale_date": {
-            "type": "DATE",
-            "code": "sale_date",
-            "label": "Sales Date",
-            "noLabel": false,
-            "required": true,
-            "unique": false,
-            "defaultValue": "",
-            "defaultNowValue": false
-        },
-        "Record_number": {
-            "type": "RECORD_NUMBER",
-            "code": "Record_number",
-            "label": "Record number",
-            "noLabel": false
-        },
-        "sale_month": {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "sale_month",
-            "label": "Sales Month & Year",
+        "Attachment": {
+            "type": "FILE",
+            "code": "Attachment",
+            "label": "Attachment",
             "noLabel": false,
             "required": false,
-            "minLength": "",
-            "maxLength": "",
-            "expression": "DATE_FORMAT(sale_date, \"MMM, YYYY\", \"Etc/GMT\")",
-            "hideExpression": false,
-            "unique": false,
-            "defaultValue": ""
+            "thumbnailSize": "150"
         },
-        "currency": {
-            "type": "DROP_DOWN",
-            "code": "currency",
-            "label": "Currency",
-            "noLabel": false,
-            "required": true,
-            "options": {
-                "SGD": {
-                    "label": "SGD",
-                    "index": "1"
-                },
-                "USD": {
-                    "label": "USD",
-                    "index": "0"
-                }
-            },
-            "defaultValue": "USD"
-        },
-        "Lookup": {
+        "Customer_data_PPH": {
             "type": "SINGLE_LINE_TEXT",
-            "code": "Lookup",
+            "code": "Customer_data_PPH",
             "label": "Customer Name",
             "noLabel": false,
             "required": false,
             "lookup": {
                 "relatedApp": {
-                    "app": "8",
+                    "app": "143",
                     "code": ""
                 },
                 "relatedKeyField": "Text",
@@ -219,57 +79,48 @@
                 "sort": "Serial_number desc"
             }
         },
+        "Updated_by": {
+            "type": "MODIFIER",
+            "code": "Updated_by",
+            "label": "Updated by",
+            "noLabel": false
+        },
+        "Purchase_stock_approvalPPH_0": {
+            "type": "CHECK_BOX",
+            "code": "Purchase_stock_approvalPPH_0",
+            "label": "Price Approval",
+            "noLabel": false,
+            "required": false,
+            "options": {
+                "Approved": {
+                    "label": "Approved",
+                    "index": "0"
+                },
+                "Rejected": {
+                    "label": "Rejected",
+                    "index": "1"
+                }
+            },
+            "defaultValue": [],
+            "align": "HORIZONTAL"
+        },
+        "Created_datetime": {
+            "type": "CREATED_TIME",
+            "code": "Created_datetime",
+            "label": "Created datetime",
+            "noLabel": false
+        },
+        "Record_number": {
+            "type": "RECORD_NUMBER",
+            "code": "Record_number",
+            "label": "Record number",
+            "noLabel": false
+        },
         "Created_by": {
             "type": "CREATOR",
             "code": "Created_by",
             "label": "Created by",
             "noLabel": false
-        },
-        "unit_price_in_USD": {
-            "type": "NUMBER",
-            "code": "unit_price_in_USD",
-            "label": "USD Unit Price",
-            "noLabel": false,
-            "required": false,
-            "minValue": "",
-            "maxValue": "",
-            "digit": false,
-            "unique": false,
-            "defaultValue": "",
-            "displayScale": "2",
-            "unit": "",
-            "unitPosition": "BEFORE"
-        },
-        "Drop_down": {
-            "type": "DROP_DOWN",
-            "code": "Drop_down",
-            "label": "Runrate",
-            "noLabel": false,
-            "required": true,
-            "options": {
-                "Project": {
-                    "label": "Project",
-                    "index": "0"
-                },
-                "Runrate": {
-                    "label": "Runrate",
-                    "index": "1"
-                }
-            },
-            "defaultValue": ""
-        },
-        "Text_2": {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "Text_2",
-            "label": "P.O. No.",
-            "noLabel": false,
-            "required": false,
-            "minLength": "",
-            "maxLength": "",
-            "expression": "",
-            "hideExpression": false,
-            "unique": false,
-            "defaultValue": ""
         },
         "User_selection": {
             "type": "USER_SELECT",
@@ -285,19 +136,6 @@
                 }
             ]
         },
-        "Text_3": {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "Text_3",
-            "label": "Deal No.",
-            "noLabel": false,
-            "required": false,
-            "minLength": "",
-            "maxLength": "",
-            "expression": "",
-            "hideExpression": false,
-            "unique": false,
-            "defaultValue": ""
-        },
         "Status": {
             "type": "STATUS",
             "code": "Status",
@@ -310,35 +148,14 @@
             "label": "Assignee",
             "enabled": false
         },
-        "quantity": {
-            "type": "NUMBER",
-            "code": "quantity",
-            "label": "Quantity",
+        "Purchase_approvalPPH_0": {
+            "type": "USER_SELECT",
+            "code": "Purchase_approvalPPH_0",
+            "label": "Price Approval (If Any)",
             "noLabel": false,
             "required": false,
-            "minValue": "0",
-            "maxValue": "",
-            "digit": false,
-            "unique": false,
-            "defaultValue": "",
-            "displayScale": "",
-            "unit": "",
-            "unitPosition": "BEFORE"
-        },
-        "exchange_rate": {
-            "type": "NUMBER",
-            "code": "exchange_rate",
-            "label": "Exchange Rate",
-            "noLabel": false,
-            "required": false,
-            "minValue": "",
-            "maxValue": "",
-            "digit": true,
-            "unique": false,
-            "defaultValue": "",
-            "displayScale": "5",
-            "unit": "",
-            "unitPosition": "BEFORE"
+            "entities": [],
+            "defaultValue": []
         },
         "Categories": {
             "type": "CATEGORY",
@@ -351,7 +168,7 @@
             "code": "probability",
             "label": "Probability",
             "noLabel": false,
-            "required": false,
+            "required": true,
             "options": {
                 "50% - Evaluation": {
                     "label": "50% - Evaluation",
@@ -380,21 +197,6 @@
             },
             "defaultValue": ""
         },
-        "unit_price_in_SGD": {
-            "type": "NUMBER",
-            "code": "unit_price_in_SGD",
-            "label": "SGD Unit Price",
-            "noLabel": false,
-            "required": false,
-            "minValue": "",
-            "maxValue": "",
-            "digit": false,
-            "unique": false,
-            "defaultValue": "",
-            "displayScale": "2",
-            "unit": "",
-            "unitPosition": "BEFORE"
-        },
         "Costing_sheet_approver": {
             "type": "USER_SELECT",
             "code": "Costing_sheet_approver",
@@ -403,28 +205,6 @@
             "required": false,
             "entities": [],
             "defaultValue": []
-        },
-        "Department_selection": {
-            "type": "ORGANIZATION_SELECT",
-            "code": "Department_selection",
-            "label": "Department selection",
-            "noLabel": false,
-            "required": false,
-            "entities": [],
-            "defaultValue": []
-        },
-        "Text": {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "Text",
-            "label": "Project Name",
-            "noLabel": false,
-            "required": false,
-            "minLength": "",
-            "maxLength": "",
-            "expression": "",
-            "hideExpression": false,
-            "unique": false,
-            "defaultValue": ""
         },
         "Date": {
             "type": "DATE",
@@ -444,45 +224,53 @@
             "required": false,
             "defaultValue": ""
         },
+        "Purchase_approvalPPH": {
+            "type": "USER_SELECT",
+            "code": "Purchase_approvalPPH",
+            "label": "Purchase Requisition Approval (If Any)",
+            "noLabel": false,
+            "required": false,
+            "entities": [],
+            "defaultValue": []
+        },
         "Updated_datetime": {
             "type": "UPDATED_TIME",
             "code": "Updated_datetime",
             "label": "Updated datetime",
             "noLabel": false
         },
-        "product_type": {
-            "type": "DROP_DOWN",
-            "code": "product_type",
-            "label": "Product Type",
+        "Department_selection_PPH": {
+            "type": "ORGANIZATION_SELECT",
+            "code": "Department_selection_PPH",
+            "label": "Department selection",
             "noLabel": false,
-            "required": true,
+            "required": false,
+            "entities": [],
+            "defaultValue": [
+                {
+                    "type": "ORGANIZATION",
+                    "code": "Panasonic PH_idTx2z"
+                }
+            ]
+        },
+        "Purchase_stock_approvalPPH": {
+            "type": "CHECK_BOX",
+            "code": "Purchase_stock_approvalPPH",
+            "label": "Purchase Stock Approval",
+            "noLabel": false,
+            "required": false,
             "options": {
-                "Projector": {
-                    "label": "Projector",
+                "Approved": {
+                    "label": "Approved",
                     "index": "0"
                 },
-                "Others": {
-                    "label": "Others",
-                    "index": "5"
-                },
-                "Spare Parts": {
-                    "label": "Spare Parts",
-                    "index": "4"
-                },
-                "Third Party": {
-                    "label": "Third Party",
-                    "index": "3"
-                },
-                "FPD": {
-                    "label": "FPD",
-                    "index": "2"
-                },
-                "Extended Warranty": {
-                    "label": "Extended Warranty",
+                "Rejected": {
+                    "label": "Rejected",
                     "index": "1"
                 }
             },
-            "defaultValue": ""
+            "defaultValue": [],
+            "align": "HORIZONTAL"
         },
         "Special_price": {
             "type": "CHECK_BOX",
@@ -503,97 +291,147 @@
             "defaultValue": [],
             "align": "HORIZONTAL"
         },
-        "total_USD": {
-            "type": "CALC",
-            "code": "total_USD",
-            "label": "USD TOTAL PRICE",
+        "Project_name_PPH": {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "Project_name_PPH",
+            "label": "Project Name",
             "noLabel": false,
             "required": false,
-            "expression": "IF(unit_price_in_SGD=0, unit_price_in_USD*quantity, unit_price_in_SGD*quantity*exchange_rate)",
-            "format": "NUMBER_DIGIT",
-            "displayScale": "2",
+            "minLength": "",
+            "maxLength": "",
+            "expression": "",
             "hideExpression": false,
-            "unit": "USD",
-            "unitPosition": "AFTER"
-        },
-        "Region": {
-            "type": "DROP_DOWN",
-            "code": "Region",
-            "label": "Region",
-            "noLabel": false,
-            "required": true,
-            "options": {
-                "Myanmar": {
-                    "label": "Myanmar",
-                    "index": "4"
-                },
-                "Vietnam": {
-                    "label": "Vietnam",
-                    "index": "1"
-                },
-                "Singapore": {
-                    "label": "Singapore",
-                    "index": "0"
-                },
-                "Cambodia": {
-                    "label": "Cambodia",
-                    "index": "2"
-                },
-                "Philippines": {
-                    "label": "Philippines",
-                    "index": "5"
-                },
-                "Indonesia": {
-                    "label": "Indonesia",
-                    "index": "3"
-                },
-                "Other": {
-                    "label": "Other",
-                    "index": "6"
-                }
-            },
+            "unique": false,
             "defaultValue": ""
         },
-        "Lookup_1": {
+        "Lookup_0": {
             "type": "SINGLE_LINE_TEXT",
-            "code": "Lookup_1",
-            "label": "Model",
+            "code": "Lookup_0",
+            "label": "Authorized Partner Name",
             "noLabel": false,
             "required": false,
             "lookup": {
                 "relatedApp": {
-                    "app": "6",
+                    "app": "192",
                     "code": ""
                 },
-                "relatedKeyField": "Text_1",
+                "relatedKeyField": "Text",
                 "fieldMappings": [],
                 "lookupPickerFields": [],
                 "filterCond": "",
-                "sort": "Record_number desc"
+                "sort": "Serial_number desc"
             }
         },
-        "quarter": {
+        "region": {
             "type": "DROP_DOWN",
-            "code": "quarter",
-            "label": "Quarter",
+            "code": "region",
+            "label": "Region",
+            "noLabel": false,
+            "required": false,
+            "options": {
+                "Philippines": {
+                    "label": "Philippines",
+                    "index": "0"
+                }
+            },
+            "defaultValue": "Philippines"
+        },
+        "Industry_PPH": {
+            "type": "DROP_DOWN",
+            "code": "Industry_PPH",
+            "label": "Industry",
             "noLabel": false,
             "required": true,
             "options": {
-                "Q1": {
-                    "label": "Q1",
-                    "index": "0"
+                "Others": {
+                    "label": "Others",
+                    "index": "17"
                 },
-                "Q2": {
-                    "label": "Q2",
-                    "index": "1"
-                },
-                "Q3": {
-                    "label": "Q3",
+                "Construction": {
+                    "label": "Construction",
                     "index": "2"
                 },
-                "Q4": {
-                    "label": "Q4",
+                "Entertainment": {
+                    "label": "Entertainment",
+                    "index": "6"
+                },
+                "Government": {
+                    "label": "Government",
+                    "index": "7"
+                },
+                "Corporate": {
+                    "label": "Corporate",
                     "index": "3"
+                },
+                "Museum / Gallery": {
+                    "label": "Museum / Gallery",
+                    "index": "11"
+                },
+                "Telecommunications": {
+                    "label": "Telecommunications",
+                    "index": "14"
+                },
+                "Banking / Finance": {
+                    "label": "Banking / Finance",
+                    "index": "1"
+                },
+                "Automotive": {
+                    "label": "Automotive",
+                    "index": "0"
+                },
+                "Tourism": {
+                    "label": "Tourism",
+                    "index": "15"
+                },
+                "Retail": {
+                    "label": "Retail",
+                    "index": "13"
+                },
+                "Utilities / Energy / Oil & Gas": {
+                    "label": "Utilities / Energy / Oil & Gas",
+                    "index": "16"
+                },
+                "Rental": {
+                    "label": "Rental",
+                    "index": "12"
+                },
+                "Education": {
+                    "label": "Education",
+                    "index": "5"
+                },
+                "Leisure": {
+                    "label": "Leisure",
+                    "index": "10"
+                },
+                "House of Worship": {
+                    "label": "House of Worship",
+                    "index": "9"
+                },
+                "Healthcare": {
+                    "label": "Healthcare",
+                    "index": "8"
+                },
+                "Defense / Military": {
+                    "label": "Defense / Military",
+                    "index": "4"
+                }
+            },
+            "defaultValue": ""
+        },
+        "Runrate_PPH": {
+            "type": "DROP_DOWN",
+            "code": "Runrate_PPH",
+            "label": "Runrate",
+            "noLabel": false,
+            "required": true,
+            "options": {
+                "Project": {
+                    "label": "Project",
+                    "index": "0"
+                },
+                "Runrate": {
+                    "label": "Runrate",
+                    "index": "1"
                 }
             },
             "defaultValue": ""

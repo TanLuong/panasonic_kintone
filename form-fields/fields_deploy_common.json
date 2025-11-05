@@ -209,7 +209,7 @@
                     "required": true,
                     "lookup": {
                         "relatedApp": {
-                            "app": "6",
+                            "app": "74",
                             "code": ""
                         },
                         "relatedKeyField": "Text_1",

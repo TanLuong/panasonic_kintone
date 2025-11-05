@@ -32,6 +32,8 @@ export const summaryElement = async (appID: number) => {
         ]
     })
 
+    const unknownRoute = "未知";
+
     const sumaryData = response && response.records.reduce((pre: any, cur: any) => {
         pre['count']++
         pre['guest'] += parseInt(cur[adult].value || 0) + parseInt(cur[child].value || 0)
@@ -40,10 +42,10 @@ export const summaryElement = async (appID: number) => {
         if (!pre['roomType'][cur[room_type].value]) {
             pre['roomType'][cur[room_type].value] = 1
         } else pre['roomType'][cur[room_type].value]++
-
+        cur[reservation_chanel].value ??= unknownRoute
         if (!pre['reservationChanel'][cur[reservation_chanel].value]) {
             pre['reservationChanel'][cur[reservation_chanel].value] = 1
-        } else pre['reservationChanel'][cur[reservation_chanel].value]++
+        } else pre['reservationChanel'][cur[reservation_chanel].value ]++
         return pre
     }, {
         count: 0,
@@ -55,7 +57,7 @@ export const summaryElement = async (appID: number) => {
     })
     const el = document.createElement('div');
     const root = createRoot(el);
-    root.render(<Summary {...sumaryData}/>); // ✅ correct usage
+    root.render(<Summary {...sumaryData}/>);
 
     return el
 }
