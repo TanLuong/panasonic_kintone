@@ -27,7 +27,7 @@ def fetch_data(url, **kwargs):
     response.raise_for_status()
     return response.json()
 
-app = App(subdomain='panasonic-ppndap')
+app = App(subdomain='development')
 
 if __name__ == '__main__':
     layout = fetch_data(app.get_form_layout_url(), json={"app": 252})

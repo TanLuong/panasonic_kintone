@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 
 import { quarter, PSI, disableField, financialYear } from './function';
+import { AnyAaaaRecord } from "node:dns";
 
 declare const kintone: any
 declare const EXCHANGE_APP_ID: number
@@ -203,7 +204,7 @@ interface ExchangeRateMap {
       });
   });
 
-    const submitSuccessEvents: string[] = [
+  const submitSuccessEvents: string[] = [
     'app.record.create.submit.success',
     'app.record.edit.submit.success',
     'app.record.index.edit.submit.success',
@@ -217,13 +218,13 @@ interface ExchangeRateMap {
     let numberRow = record[tableField].value.length;
     for (let i = 0; i < numberRow; i++) {
       if (
-        record[tableField].value[i].value[currencyInTable].value != "USD" && 
+        record[tableField].value[i].value[currencyInTable].value != "USD" &&
         record[tableField].value[i].value[exchangeRateInTable].value == 0
       ) {
-          let rowDate = new Date(record[tableField].value[i].value[saleDateTable].value);
-          let month = rowDate.toLocaleString('en-US', { month: 'short' });
-          let year = rowDate.getFullYear();
-          messages.push(`${month}-${year}`)
+        let rowDate = new Date(record[tableField].value[i].value[saleDateTable].value);
+        let month = rowDate.toLocaleString('en-US', { month: 'short' });
+        let year = rowDate.getFullYear();
+        messages.push(`${month}-${year}`)
       }
     }
     if (messages.length > 0) {
@@ -234,5 +235,25 @@ interface ExchangeRateMap {
       })
     }
     return event;
+  });
+
+  const indexShowEvent = ['app.record.index.show']
+  kintone.events.on(indexShowEvent, function (e: any) {
+    krewsheet.events.on('app.record.index.edit.submit', function (event: any) {
+      let records = event.records;
+      console.log("submit event before modify:", event)
+      // if (record.sale_date.value != '') {
+      //   let date = new Date(record.sale_date.value);
+      //   let month = date.toLocaleString('en-US', { month: 'short' });
+      //   record.financial_year.value = financialYear(date);
+      //   record.quarter.value = quarter(date.getMonth() + 1);
+      //   //   record.exchange_rate.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
+      //   // if (!record.unit_price_in_SGD.value && !record.unit_price_in_USD.value) {
+      //   //     event.error = 'Unit Price is required, please enter value for one of currency';
+      //   // }
+      // }
+      console.log("submit event after modify:", event)
+      return event;
+    });
   });
 })();

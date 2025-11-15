@@ -37,8 +37,8 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
             <div className="guest-info">
               <h4 className="guest-name">{room.guest.name}</h4>
               <div className="guest-meta">
-                <span>{textDict['adults']}: {room.guest.adults}</span>
-                <span>{room.guest.nights} {textDict['nights']}</span>
+                <span>{textDict['adults']}: {room.guest.adults}{textDict['person_unit']}</span>
+                <span>{room.guest.nights}{textDict['nights']}</span>
                 <span>¥{room.guest.price.toLocaleString()}</span>
               </div>
               <span className={`payment-badge ${paymentStatusStyles[room.guest.paymentStatus]}`}>
@@ -55,10 +55,10 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
             )}
           </div>
         ) : (
-          <div className="empty-state">
-            <div>
-                {room.status === RoomStatus.Available ? 'Room is available' : `Cleaning (Until ${room.cleaningCompleteTime || 'N/A'})`}
-            </div>
+          <div className="empty-state" style={{ height: '100%' }}>
+            <pre>
+                {!room.description ? '本日は空室です' : room.description}
+            </pre>
           </div>
         )}
       </div>

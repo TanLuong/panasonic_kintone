@@ -25,4 +25,5 @@ export const textDict = {
     notes: "備考",
     adults: "大人",
     nights: "泊",
+    person_unit: "名",
 }

@@ -1,453 +1,202 @@
 {
-    "revision": "209",
     "properties": {
-        "Status_PPH": {
+        "prefectures": {
             "type": "DROP_DOWN",
-            "code": "Status_PPH",
-            "label": "Status",
-            "noLabel": false,
-            "required": false,
-            "options": {
-                "Lost": {
-                    "label": "Lost",
-                    "index": "4"
-                },
-                "Quoted": {
-                    "label": "Quoted",
-                    "index": "1"
-                },
-                "Won": {
-                    "label": "Won",
-                    "index": "3"
-                },
-                "On-Going": {
-                    "label": "On-Going",
-                    "index": "0"
-                },
-                "Tender": {
-                    "label": "Tender",
-                    "index": "2"
-                }
-            },
-            "defaultValue": ""
-        },
-        "psi": {
-            "type": "DROP_DOWN",
-            "code": "psi",
-            "label": "PSI",
+            "code": "prefectures",
+            "label": "都道府県",
             "noLabel": false,
             "required": true,
             "options": {
-                "IN": {
-                    "label": "IN",
-                    "index": "0"
+                "北海道": {
+                    "label": "北海道",
+                    "index": "1"
                 },
-                "LOST": {
-                    "label": "LOST",
+                "青森県": {
+                    "label": "青森県",
                     "index": "2"
                 },
-                "OUT": {
-                    "label": "OUT",
-                    "index": "1"
-                }
-            },
-            "defaultValue": ""
-        },
-        "Attachment": {
-            "type": "FILE",
-            "code": "Attachment",
-            "label": "Attachment",
-            "noLabel": false,
-            "required": false,
-            "thumbnailSize": "150"
-        },
-        "Customer_data_PPH": {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "Customer_data_PPH",
-            "label": "Customer Name",
-            "noLabel": false,
-            "required": false,
-            "lookup": {
-                "relatedApp": {
-                    "app": "143",
-                    "code": ""
-                },
-                "relatedKeyField": "Text",
-                "fieldMappings": [],
-                "lookupPickerFields": [],
-                "filterCond": "",
-                "sort": "Serial_number desc"
-            }
-        },
-        "Updated_by": {
-            "type": "MODIFIER",
-            "code": "Updated_by",
-            "label": "Updated by",
-            "noLabel": false
-        },
-        "Purchase_stock_approvalPPH_0": {
-            "type": "CHECK_BOX",
-            "code": "Purchase_stock_approvalPPH_0",
-            "label": "Price Approval",
-            "noLabel": false,
-            "required": false,
-            "options": {
-                "Approved": {
-                    "label": "Approved",
-                    "index": "0"
-                },
-                "Rejected": {
-                    "label": "Rejected",
-                    "index": "1"
-                }
-            },
-            "defaultValue": [],
-            "align": "HORIZONTAL"
-        },
-        "Created_datetime": {
-            "type": "CREATED_TIME",
-            "code": "Created_datetime",
-            "label": "Created datetime",
-            "noLabel": false
-        },
-        "Record_number": {
-            "type": "RECORD_NUMBER",
-            "code": "Record_number",
-            "label": "Record number",
-            "noLabel": false
-        },
-        "Created_by": {
-            "type": "CREATOR",
-            "code": "Created_by",
-            "label": "Created by",
-            "noLabel": false
-        },
-        "User_selection": {
-            "type": "USER_SELECT",
-            "code": "User_selection",
-            "label": "Sales Owner",
-            "noLabel": false,
-            "required": false,
-            "entities": [],
-            "defaultValue": [
-                {
-                    "type": "FUNCTION",
-                    "code": "LOGINUSER()"
-                }
-            ]
-        },
-        "Status": {
-            "type": "STATUS",
-            "code": "Status",
-            "label": "Status",
-            "enabled": false
-        },
-        "Assignee": {
-            "type": "STATUS_ASSIGNEE",
-            "code": "Assignee",
-            "label": "Assignee",
-            "enabled": false
-        },
-        "Purchase_approvalPPH_0": {
-            "type": "USER_SELECT",
-            "code": "Purchase_approvalPPH_0",
-            "label": "Price Approval (If Any)",
-            "noLabel": false,
-            "required": false,
-            "entities": [],
-            "defaultValue": []
-        },
-        "Categories": {
-            "type": "CATEGORY",
-            "code": "Categories",
-            "label": "Categories",
-            "enabled": false
-        },
-        "probability": {
-            "type": "DROP_DOWN",
-            "code": "probability",
-            "label": "Probability",
-            "noLabel": false,
-            "required": true,
-            "options": {
-                "50% - Evaluation": {
-                    "label": "50% - Evaluation",
+                "岩手県": {
+                    "label": "岩手県",
                     "index": "3"
                 },
-                "70% - Shortlisted, Negotiation": {
-                    "label": "70% - Shortlisted, Negotiation",
+                "宮城県": {
+                    "label": "宮城県",
                     "index": "4"
                 },
-                "30% - Quoted": {
-                    "label": "30% - Quoted",
-                    "index": "2"
-                },
-                "0% - Lost": {
-                    "label": "0% - Lost",
-                    "index": "0"
-                },
-                "10% - Enquiry, Identification": {
-                    "label": "10% - Enquiry, Identification",
-                    "index": "1"
-                },
-                "100% - Confirmed": {
-                    "label": "100% - Confirmed",
+                "秋田県": {
+                    "label": "秋田県",
                     "index": "5"
-                }
-            },
-            "defaultValue": ""
-        },
-        "Costing_sheet_approver": {
-            "type": "USER_SELECT",
-            "code": "Costing_sheet_approver",
-            "label": "Costing Sheet Approval (If Any)",
-            "noLabel": false,
-            "required": false,
-            "entities": [],
-            "defaultValue": []
-        },
-        "Date": {
-            "type": "DATE",
-            "code": "Date",
-            "label": "Entry Date",
-            "noLabel": false,
-            "required": false,
-            "unique": false,
-            "defaultValue": "",
-            "defaultNowValue": false
-        },
-        "Text_area": {
-            "type": "MULTI_LINE_TEXT",
-            "code": "Text_area",
-            "label": "Remark",
-            "noLabel": false,
-            "required": false,
-            "defaultValue": ""
-        },
-        "Purchase_approvalPPH": {
-            "type": "USER_SELECT",
-            "code": "Purchase_approvalPPH",
-            "label": "Purchase Requisition Approval (If Any)",
-            "noLabel": false,
-            "required": false,
-            "entities": [],
-            "defaultValue": []
-        },
-        "Updated_datetime": {
-            "type": "UPDATED_TIME",
-            "code": "Updated_datetime",
-            "label": "Updated datetime",
-            "noLabel": false
-        },
-        "Department_selection_PPH": {
-            "type": "ORGANIZATION_SELECT",
-            "code": "Department_selection_PPH",
-            "label": "Department selection",
-            "noLabel": false,
-            "required": false,
-            "entities": [],
-            "defaultValue": [
-                {
-                    "type": "ORGANIZATION",
-                    "code": "Panasonic PH_idTx2z"
-                }
-            ]
-        },
-        "Purchase_stock_approvalPPH": {
-            "type": "CHECK_BOX",
-            "code": "Purchase_stock_approvalPPH",
-            "label": "Purchase Stock Approval",
-            "noLabel": false,
-            "required": false,
-            "options": {
-                "Approved": {
-                    "label": "Approved",
-                    "index": "0"
                 },
-                "Rejected": {
-                    "label": "Rejected",
-                    "index": "1"
-                }
-            },
-            "defaultValue": [],
-            "align": "HORIZONTAL"
-        },
-        "Special_price": {
-            "type": "CHECK_BOX",
-            "code": "Special_price",
-            "label": "Special Price Approval",
-            "noLabel": false,
-            "required": false,
-            "options": {
-                "Approved": {
-                    "label": "Approved",
-                    "index": "0"
-                },
-                "Rejected": {
-                    "label": "Rejected",
-                    "index": "1"
-                }
-            },
-            "defaultValue": [],
-            "align": "HORIZONTAL"
-        },
-        "Project_name_PPH": {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "Project_name_PPH",
-            "label": "Project Name",
-            "noLabel": false,
-            "required": false,
-            "minLength": "",
-            "maxLength": "",
-            "expression": "",
-            "hideExpression": false,
-            "unique": false,
-            "defaultValue": ""
-        },
-        "Lookup_0": {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "Lookup_0",
-            "label": "Authorized Partner Name",
-            "noLabel": false,
-            "required": false,
-            "lookup": {
-                "relatedApp": {
-                    "app": "192",
-                    "code": ""
-                },
-                "relatedKeyField": "Text",
-                "fieldMappings": [],
-                "lookupPickerFields": [],
-                "filterCond": "",
-                "sort": "Serial_number desc"
-            }
-        },
-        "region": {
-            "type": "DROP_DOWN",
-            "code": "region",
-            "label": "Region",
-            "noLabel": false,
-            "required": false,
-            "options": {
-                "Philippines": {
-                    "label": "Philippines",
-                    "index": "0"
-                }
-            },
-            "defaultValue": "Philippines"
-        },
-        "Industry_PPH": {
-            "type": "DROP_DOWN",
-            "code": "Industry_PPH",
-            "label": "Industry",
-            "noLabel": false,
-            "required": true,
-            "options": {
-                "Others": {
-                    "label": "Others",
-                    "index": "17"
-                },
-                "Construction": {
-                    "label": "Construction",
-                    "index": "2"
-                },
-                "Entertainment": {
-                    "label": "Entertainment",
+                "山形県": {
+                    "label": "山形県",
                     "index": "6"
                 },
-                "Government": {
-                    "label": "Government",
+                "福島県": {
+                    "label": "福島県",
                     "index": "7"
                 },
-                "Corporate": {
-                    "label": "Corporate",
-                    "index": "3"
-                },
-                "Museum / Gallery": {
-                    "label": "Museum / Gallery",
-                    "index": "11"
-                },
-                "Telecommunications": {
-                    "label": "Telecommunications",
-                    "index": "14"
-                },
-                "Banking / Finance": {
-                    "label": "Banking / Finance",
-                    "index": "1"
-                },
-                "Automotive": {
-                    "label": "Automotive",
-                    "index": "0"
-                },
-                "Tourism": {
-                    "label": "Tourism",
-                    "index": "15"
-                },
-                "Retail": {
-                    "label": "Retail",
-                    "index": "13"
-                },
-                "Utilities / Energy / Oil & Gas": {
-                    "label": "Utilities / Energy / Oil & Gas",
-                    "index": "16"
-                },
-                "Rental": {
-                    "label": "Rental",
-                    "index": "12"
-                },
-                "Education": {
-                    "label": "Education",
-                    "index": "5"
-                },
-                "Leisure": {
-                    "label": "Leisure",
-                    "index": "10"
-                },
-                "House of Worship": {
-                    "label": "House of Worship",
-                    "index": "9"
-                },
-                "Healthcare": {
-                    "label": "Healthcare",
+                "茨城県": {
+                    "label": "茨城県",
                     "index": "8"
                 },
-                "Defense / Military": {
-                    "label": "Defense / Military",
-                    "index": "4"
-                }
-            },
-            "defaultValue": ""
-        },
-        "Runrate_PPH": {
-            "type": "DROP_DOWN",
-            "code": "Runrate_PPH",
-            "label": "Runrate",
-            "noLabel": false,
-            "required": true,
-            "options": {
-                "Project": {
-                    "label": "Project",
-                    "index": "0"
+                "栃木県": {
+                    "label": "栃木県",
+                    "index": "9"
                 },
-                "Runrate": {
-                    "label": "Runrate",
-                    "index": "1"
+                "群馬県": {
+                    "label": "群馬県",
+                    "index": "10"
+                },
+                "埼玉県": {
+                    "label": "埼玉県",
+                    "index": "11"
+                },
+                "千葉県": {
+                    "label": "千葉県",
+                    "index": "12"
+                },
+                "東京都": {
+                    "label": "東京都",
+                    "index": "13"
+                },
+                "神奈川県": {
+                    "label": "神奈川県",
+                    "index": "14"
+                },
+                "新潟県": {
+                    "label": "新潟県",
+                    "index": "15"
+                },
+                "富山県": {
+                    "label": "富山県",
+                    "index": "16"
+                },
+                "石川県": {
+                    "label": "石川県",
+                    "index": "17"
+                },
+                "福井県": {
+                    "label": "福井県",
+                    "index": "18"
+                },
+                "山梨県": {
+                    "label": "山梨県",
+                    "index": "19"
+                },
+                "長野県": {
+                    "label": "長野県",
+                    "index": "20"
+                },
+                "岐阜県": {
+                    "label": "岐阜県",
+                    "index": "21"
+                },
+                "静岡県": {
+                    "label": "静岡県",
+                    "index": "22"
+                },
+                "愛知県": {
+                    "label": "愛知県",
+                    "index": "23"
+                },
+                "三重県": {
+                    "label": "三重県",
+                    "index": "24"
+                },
+                "滋賀県": {
+                    "label": "滋賀県",
+                    "index": "25"
+                },
+                "京都府": {
+                    "label": "京都府",
+                    "index": "26"
+                },
+                "大阪府": {
+                    "label": "大阪府",
+                    "index": "27"
+                },
+                "兵庫県": {
+                    "label": "兵庫県",
+                    "index": "28"
+                },
+                "奈良県": {
+                    "label": "奈良県",
+                    "index": "29"
+                },
+                "和歌山県": {
+                    "label": "和歌山県",
+                    "index": "30"
+                },
+                "鳥取県": {
+                    "label": "鳥取県",
+                    "index": "31"
+                },
+                "島根県": {
+                    "label": "島根県",
+                    "index": "32"
+                },
+                "岡山県": {
+                    "label": "岡山県",
+                    "index": "33"
+                },
+                "広島県": {
+                    "label": "広島県",
+                    "index": "34"
+                },
+                "山口県": {
+                    "label": "山口県",
+                    "index": "35"
+                },
+                "徳島県": {
+                    "label": "徳島県",
+                    "index": "36"
+                },
+                "香川県": {
+                    "label": "香川県",
+                    "index": "37"
+                },
+                "愛媛県": {
+                    "label": "愛媛県",
+                    "index": "38"
+                },
+                "高知県": {
+                    "label": "高知県",
+                    "index": "39"
+                },
+                "福岡県": {
+                    "label": "福岡県",
+                    "index": "40"
+                },
+                "佐賀県": {
+                    "label": "佐賀県",
+                    "index": "41"
+                },
+                "長崎県": {
+                    "label": "長崎県",
+                    "index": "42"
+                },
+                "熊本県": {
+                    "label": "熊本県",
+                    "index": "43"
+                },
+                "大分県": {
+                    "label": "大分県",
+                    "index": "44"
+                },
+                "宮崎県": {
+                    "label": "宮崎県",
+                    "index": "45"
+                },
+                "鹿児島県": {
+                    "label": "鹿児島県",
+                    "index": "46"
+                },
+                "沖縄県": {
+                    "label": "沖縄県",
+                    "index": "47"
                 }
             },
-            "defaultValue": ""
-        },
-        "RECORD_NO": {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "RECORD_NO",
-            "label": "Record No.",
-            "noLabel": false,
-            "required": false,
-            "minLength": "",
-            "maxLength": "",
-            "expression": "",
-            "hideExpression": false,
-            "unique": false,
-            "defaultValue": ""
+            "defaultValue": "北海道"
         }
     }
 }

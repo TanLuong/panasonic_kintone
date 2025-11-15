@@ -53,6 +53,7 @@ const mergeRoomData = (reservationRecords: any[], roomRecords: any[]): any[] => 
         return {
             room_number: roomRecord[fields.room_number].value,
             room_type: roomRecord[fields.room_type].value,
+            room_description: roomRecord[fields.room_description]?.value || '',
         };
     });
 };
@@ -91,6 +92,7 @@ const mapDataToRooms = (data: any[]): Room[] => {
                 bookingSource: record.reservation_chanel || '',
                 remarks: record.memos || '',
             } : undefined,
+            description: record.room_description || '',
         };
     });
 };
@@ -114,7 +116,7 @@ export const fetchHotelData = async (reservationAppId: number, roomAppId: number
     const roomRequest = getRecords({
         app: roomAppId,
         sortConds: [`${fields.room_number} asc`],
-        fields: [fields.room_number, fields.room_type],
+        fields: [fields.room_number, fields.room_type, fields.room_description],
     });
 
     const [reservationResponse, roomResponse] = await Promise.all([reservationRequest, roomRequest]);

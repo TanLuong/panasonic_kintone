@@ -6,10 +6,11 @@ import RoomCard from './components/RoomCard';
 import Pagination from '../../../components/Pagination';
 import Summary from './components/Summary';
 
-const ITEMS_PER_PAGE = 8;
+const ITEMS_PER_PAGE = 2000;
 // TODO: Please replace with your actual Kintone App IDs
 declare const ROOM_LIST_APP_ID: number;
 declare const kintone: any;
+declare const RESERVATION_APP_ID: any;
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,7 +21,6 @@ const App: React.FC = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const RESERVATION_APP_ID = kintone.app.getId()
         const fetchedRooms = await fetchHotelData(RESERVATION_APP_ID, ROOM_LIST_APP_ID);
         setRooms(fetchedRooms);
       } catch (err) {
@@ -47,13 +47,9 @@ const App: React.FC = () => {
 
   return (
     <div className="app-root">
-      <header className="app-header">
-        部屋割り表アプリ
-      </header>
-
       <main className="app-main">
         {loading ? (
-          <div className="loading">Loading room data...</div>
+          <div className="loading">荷積み室データ...</div>
         ) : error ? (
           <div className="error">{error}</div>
         ) : (

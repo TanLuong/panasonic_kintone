@@ -10,6 +10,13 @@ export enum PaymentStatus {
   Onsite = 'Onsite Payment',
 }
 
+export enum ReservationStatus {
+  Unprocessed = '未対応',
+  InProgress = '対応中',
+  Completed = '完了',
+  Cancelled = 'キャンセル',
+}
+
 export interface Guest {
   name: string;
   adults: number;
@@ -32,4 +39,5 @@ export interface Room {
     remarks: string;
   };
   cleaningCompleteTime?: string;
+  description?: string;
 }

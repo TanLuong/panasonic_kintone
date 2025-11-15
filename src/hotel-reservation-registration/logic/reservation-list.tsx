@@ -56,6 +56,7 @@ export const summaryElement = async (appID: number) => {
         reservationChanel: {}
     })
     const el = document.createElement('div');
+    el.id = 'summary_month'
     const root = createRoot(el);
     root.render(<Summary {...sumaryData}/>);
 

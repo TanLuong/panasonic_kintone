@@ -1,3 +1,5 @@
+import { object } from "zod";
+
 declare const kintone: any;
 
 const postCursor = async (_params: {
@@ -96,4 +98,24 @@ export const paginateRecords = (records: object[], pageSize: number, pageNumber:
 
 export const calculateTotalPages = (totalRecords: number, pageSize: number) => {
     return Math.ceil(totalRecords / pageSize);
+}
+
+export const getOptionsOfField = async (appId: number, fieldCode: string) => {
+    const body = {
+        app: appId,
+    };
+    const response = await kintone.api(kintone.api.url('/k/v1/app/form/fields', true), 'GET', body)
+    const fieldOptions = response['properties'][fieldCode]['options'];
+    return Object.keys(fieldOptions).map(key => key );
+}
+
+export const createDatalist = (data: string[], field: string) => {
+    const dataList = document.createElement('datalist');
+    dataList.id = 'datalist-' + field;
+    data.forEach((item: any) => {
+        const option = document.createElement('option');
+        option.value = item;
+        dataList.appendChild(option);
+    });
+    document.body.appendChild(dataList);
 }

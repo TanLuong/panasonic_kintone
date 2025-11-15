@@ -12,3 +12,5 @@ export const customer_name = 'customer_name';
 export const check_in = 'check_in';
 export const check_out = 'check_out';
 export const payment_method = 'payment_method';
+export const room_description = 'description';
+export const reservation_status = 'status';
