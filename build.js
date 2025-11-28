@@ -1,6 +1,6 @@
 const esbuild = require("esbuild");
 const fs = require("fs");
-const { basename } = require("path");
+const { basename, parse } = require("path");
 const dotenv = require('dotenv')
 
 
@@ -10,18 +10,19 @@ if (entry.split("/").length < 3) {
   console.error("Entry must be in the format 'src/folder/file.js'");
   process.exit(1);
 }
-const outfile = entry.split("/")[1]
+const pathInfo = parse(entry);
+const outfile = entry.split("/")[1];
 const isProd = process.argv.includes("--prod");
 const ENV_VARIABLE = {}
 
-if (fs.existsSync(`./src/${outfile}/.prod.env`) || fs.existsSync(`./src/${outfile}/.dev.env`) ) {
+if (fs.existsSync(`./${pathInfo.dir}/.prod.env`) || fs.existsSync(`./${pathInfo.dir}/.dev.env`) ) {
   if (isProd) {
-    dotenv.config({path: `./src/${outfile}/.prod.env`})
+    dotenv.config({path: `./${pathInfo.dir}/.prod.env`})
   } else {
-    dotenv.config({path: `./src/${outfile}/.dev.env`})
+    dotenv.config({path: `./${pathInfo.dir}/.dev.env`})
   }
 
-  const { ENV } = require(`./src/${outfile}/constant.ts`)
+  const { ENV } = require(`./${pathInfo.dir}/constant.ts`)
 
   for (let i in ENV) {
     ENV_VARIABLE[i] = process.env[i]
@@ -36,7 +37,7 @@ const buildOptions = {
   bundle: true,
   minify: isProd,
   sourcemap: !isProd,
-  outfile: `dist/${outfile}/index.js`,
+  outfile: `dist/${pathInfo.dir.replace(/\//g, '_')}/index.js`,
   platform: "browser",
   define: {
     "process.env.NODE_ENV": `"${isProd ? "production" : "development"}"`,

@@ -38,3 +38,5 @@ package-lock.json
 /dist
 /data
 __pycache__
+form-fields/
+deploy/

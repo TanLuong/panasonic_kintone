@@ -1,202 +1,450 @@
 {
+    "revision": "95",
     "properties": {
-        "prefectures": {
+        "responsive_staff": {
+            "type": "USER_SELECT",
+            "code": "responsive_staff",
+            "label": "対応者",
+            "noLabel": false,
+            "required": false,
+            "entities": [],
+            "defaultValue": []
+        },
+        "reservation_chanel": {
             "type": "DROP_DOWN",
-            "code": "prefectures",
-            "label": "都道府県",
+            "code": "reservation_chanel",
+            "label": "予約経路",
             "noLabel": false,
             "required": true,
             "options": {
-                "北海道": {
-                    "label": "北海道",
-                    "index": "1"
+                "電話": {
+                    "label": "電話",
+                    "index": "0"
                 },
-                "青森県": {
-                    "label": "青森県",
-                    "index": "2"
-                },
-                "岩手県": {
-                    "label": "岩手県",
-                    "index": "3"
-                },
-                "宮城県": {
-                    "label": "宮城県",
+                "OTA（じゃらん）": {
+                    "label": "OTA（じゃらん）",
                     "index": "4"
                 },
-                "秋田県": {
-                    "label": "秋田県",
+                "自社サイト": {
+                    "label": "自社サイト",
+                    "index": "2"
+                },
+                "FAX": {
+                    "label": "FAX",
+                    "index": "1"
+                },
+                "OTA（楽天）": {
+                    "label": "OTA（楽天）",
+                    "index": "3"
+                },
+                "その他": {
+                    "label": "その他",
                     "index": "5"
-                },
-                "山形県": {
-                    "label": "山形県",
-                    "index": "6"
-                },
-                "福島県": {
-                    "label": "福島県",
-                    "index": "7"
-                },
-                "茨城県": {
-                    "label": "茨城県",
-                    "index": "8"
-                },
-                "栃木県": {
-                    "label": "栃木県",
-                    "index": "9"
-                },
-                "群馬県": {
-                    "label": "群馬県",
-                    "index": "10"
-                },
-                "埼玉県": {
-                    "label": "埼玉県",
-                    "index": "11"
-                },
-                "千葉県": {
-                    "label": "千葉県",
-                    "index": "12"
-                },
-                "東京都": {
-                    "label": "東京都",
-                    "index": "13"
-                },
-                "神奈川県": {
-                    "label": "神奈川県",
-                    "index": "14"
-                },
-                "新潟県": {
-                    "label": "新潟県",
-                    "index": "15"
-                },
-                "富山県": {
-                    "label": "富山県",
-                    "index": "16"
-                },
-                "石川県": {
-                    "label": "石川県",
-                    "index": "17"
-                },
-                "福井県": {
-                    "label": "福井県",
-                    "index": "18"
-                },
-                "山梨県": {
-                    "label": "山梨県",
-                    "index": "19"
-                },
-                "長野県": {
-                    "label": "長野県",
-                    "index": "20"
-                },
-                "岐阜県": {
-                    "label": "岐阜県",
-                    "index": "21"
-                },
-                "静岡県": {
-                    "label": "静岡県",
-                    "index": "22"
-                },
-                "愛知県": {
-                    "label": "愛知県",
-                    "index": "23"
-                },
-                "三重県": {
-                    "label": "三重県",
-                    "index": "24"
-                },
-                "滋賀県": {
-                    "label": "滋賀県",
-                    "index": "25"
-                },
-                "京都府": {
-                    "label": "京都府",
-                    "index": "26"
-                },
-                "大阪府": {
-                    "label": "大阪府",
-                    "index": "27"
-                },
-                "兵庫県": {
-                    "label": "兵庫県",
-                    "index": "28"
-                },
-                "奈良県": {
-                    "label": "奈良県",
-                    "index": "29"
-                },
-                "和歌山県": {
-                    "label": "和歌山県",
-                    "index": "30"
-                },
-                "鳥取県": {
-                    "label": "鳥取県",
-                    "index": "31"
-                },
-                "島根県": {
-                    "label": "島根県",
-                    "index": "32"
-                },
-                "岡山県": {
-                    "label": "岡山県",
-                    "index": "33"
-                },
-                "広島県": {
-                    "label": "広島県",
-                    "index": "34"
-                },
-                "山口県": {
-                    "label": "山口県",
-                    "index": "35"
-                },
-                "徳島県": {
-                    "label": "徳島県",
-                    "index": "36"
-                },
-                "香川県": {
-                    "label": "香川県",
-                    "index": "37"
-                },
-                "愛媛県": {
-                    "label": "愛媛県",
-                    "index": "38"
-                },
-                "高知県": {
-                    "label": "高知県",
-                    "index": "39"
-                },
-                "福岡県": {
-                    "label": "福岡県",
-                    "index": "40"
-                },
-                "佐賀県": {
-                    "label": "佐賀県",
-                    "index": "41"
-                },
-                "長崎県": {
-                    "label": "長崎県",
-                    "index": "42"
-                },
-                "熊本県": {
-                    "label": "熊本県",
-                    "index": "43"
-                },
-                "大分県": {
-                    "label": "大分県",
-                    "index": "44"
-                },
-                "宮崎県": {
-                    "label": "宮崎県",
-                    "index": "45"
-                },
-                "鹿児島県": {
-                    "label": "鹿児島県",
-                    "index": "46"
-                },
-                "沖縄県": {
-                    "label": "沖縄県",
-                    "index": "47"
                 }
             },
-            "defaultValue": "北海道"
+            "defaultValue": ""
+        },
+        "customer_memo": {
+            "type": "MULTI_LINE_TEXT",
+            "code": "customer_memo",
+            "label": "顧客対応・メモ",
+            "noLabel": false,
+            "required": false,
+            "defaultValue": ""
+        },
+        "Updated_by": {
+            "type": "MODIFIER",
+            "code": "Updated_by",
+            "label": "Updated by",
+            "noLabel": false
+        },
+        "check_out": {
+            "type": "DATE",
+            "code": "check_out",
+            "label": "チェックアウト日",
+            "noLabel": false,
+            "required": true,
+            "unique": false,
+            "defaultValue": "",
+            "defaultNowValue": true
+        },
+        "Created_datetime": {
+            "type": "CREATED_TIME",
+            "code": "Created_datetime",
+            "label": "Created datetime",
+            "noLabel": false
+        },
+        "price": {
+            "type": "NUMBER",
+            "code": "price",
+            "label": "宿泊金額",
+            "noLabel": false,
+            "required": false,
+            "minValue": "0",
+            "maxValue": "",
+            "digit": true,
+            "unique": false,
+            "defaultValue": "0",
+            "displayScale": "",
+            "unit": "¥",
+            "unitPosition": "BEFORE"
+        },
+        "memos": {
+            "type": "REFERENCE_TABLE",
+            "code": "memos",
+            "label": "メモ",
+            "noLabel": false,
+            "referenceTable": {
+                "relatedApp": {
+                    "app": "1",
+                    "code": ""
+                },
+                "condition": {
+                    "field": "customer_search",
+                    "relatedField": "customer_search"
+                },
+                "filterCond": "customer_memo is not empty or staff_memo is not empty",
+                "displayFields": [
+                    "customer_memo",
+                    "staff_memo"
+                ],
+                "sort": "Record_number desc",
+                "size": "50"
+            }
+        },
+        "mobile_phone": {
+            "type": "LINK",
+            "code": "mobile_phone",
+            "label": "電話番号（携帯）",
+            "noLabel": false,
+            "required": false,
+            "protocol": "CALL",
+            "minLength": "",
+            "maxLength": "",
+            "unique": false,
+            "defaultValue": ""
+        },
+        "Record_number": {
+            "type": "RECORD_NUMBER",
+            "code": "Record_number",
+            "label": "Record number",
+            "noLabel": false
+        },
+        "customer_search": {
+            "type": "LINK",
+            "code": "customer_search",
+            "label": "顧客名または電話番号で検索",
+            "noLabel": false,
+            "required": true,
+            "lookup": {
+                "relatedApp": {
+                    "app": "2",
+                    "code": ""
+                },
+                "relatedKeyField": "mobile_phone",
+                "fieldMappings": [
+                    {
+                        "field": "customer_name",
+                        "relatedField": "name"
+                    },
+                    {
+                        "field": "mobile_phone",
+                        "relatedField": "mobile_phone"
+                    },
+                    {
+                        "field": "address",
+                        "relatedField": "Text_1"
+                    }
+                ],
+                "lookupPickerFields": [
+                    "furigana_name",
+                    "name",
+                    "mobile_phone",
+                    "Link_1"
+                ],
+                "filterCond": "",
+                "sort": "mobile_phone asc"
+            }
+        },
+        "Created_by": {
+            "type": "CREATOR",
+            "code": "Created_by",
+            "label": "Created by",
+            "noLabel": false
+        },
+        "payment_method": {
+            "type": "RADIO_BUTTON",
+            "code": "payment_method",
+            "label": "決済方法",
+            "noLabel": false,
+            "required": true,
+            "options": {
+                "事前決済済": {
+                    "label": "事前決済済",
+                    "index": "0"
+                },
+                "現地支払い": {
+                    "label": "現地支払い",
+                    "index": "1"
+                }
+            },
+            "defaultValue": "事前決済済",
+            "align": "HORIZONTAL"
+        },
+        "Status": {
+            "type": "STATUS",
+            "code": "Status",
+            "label": "Status",
+            "enabled": false
+        },
+        "Assignee": {
+            "type": "STATUS_ASSIGNEE",
+            "code": "Assignee",
+            "label": "Assignee",
+            "enabled": false
+        },
+        "payment_detail": {
+            "type": "DROP_DOWN",
+            "code": "payment_detail",
+            "label": "決済詳細",
+            "noLabel": false,
+            "required": false,
+            "options": {
+                "クレジットカード（事前）": {
+                    "label": "クレジットカード（事前）",
+                    "index": "0"
+                },
+                "クレジットカード（現地）": {
+                    "label": "クレジットカード（現地）",
+                    "index": "3"
+                },
+                "銀行振込（事前）": {
+                    "label": "銀行振込（事前）",
+                    "index": "1"
+                },
+                "現金（現地）": {
+                    "label": "現金（現地）",
+                    "index": "2"
+                },
+                "その他": {
+                    "label": "その他",
+                    "index": "4"
+                }
+            },
+            "defaultValue": ""
+        },
+        "address": {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "address",
+            "label": "番地・建物名",
+            "noLabel": false,
+            "required": false,
+            "minLength": "",
+            "maxLength": "",
+            "expression": "",
+            "hideExpression": false,
+            "unique": false,
+            "defaultValue": ""
+        },
+        "Categories": {
+            "type": "CATEGORY",
+            "code": "Categories",
+            "label": "Categories",
+            "enabled": false
+        },
+        "contract_content": {
+            "type": "MULTI_LINE_TEXT",
+            "code": "contract_content",
+            "label": "問い合わせ内容",
+            "noLabel": false,
+            "required": false,
+            "defaultValue": ""
+        },
+        "check_in": {
+            "type": "DATE",
+            "code": "check_in",
+            "label": "チェックイン日",
+            "noLabel": false,
+            "required": true,
+            "unique": false,
+            "defaultValue": "",
+            "defaultNowValue": true
+        },
+        "night": {
+            "type": "CALC",
+            "code": "night",
+            "label": "泊数",
+            "noLabel": false,
+            "required": false,
+            "expression": "(check_out - check_in)/86400",
+            "format": "NUMBER",
+            "displayScale": "0",
+            "hideExpression": false,
+            "unit": "",
+            "unitPosition": "BEFORE"
+        },
+        "payment_status": {
+            "type": "DROP_DOWN",
+            "code": "payment_status",
+            "label": "決済状況",
+            "noLabel": false,
+            "required": false,
+            "options": {
+                "決済待ち": {
+                    "label": "決済待ち",
+                    "index": "2"
+                },
+                "未確認": {
+                    "label": "未確認",
+                    "index": "0"
+                },
+                "決済完了": {
+                    "label": "決済完了",
+                    "index": "1"
+                },
+                "決済エラー": {
+                    "label": "決済エラー",
+                    "index": "3"
+                }
+            },
+            "defaultValue": ""
+        },
+        "room_number": {
+            "type": "NUMBER",
+            "code": "room_number",
+            "label": "部屋番号",
+            "noLabel": false,
+            "required": false,
+            "lookup": {
+                "relatedApp": {
+                    "app": "3",
+                    "code": ""
+                },
+                "relatedKeyField": "room_number",
+                "fieldMappings": [],
+                "lookupPickerFields": [
+                    "room_number",
+                    "room_type"
+                ],
+                "filterCond": "",
+                "sort": "Record_number desc"
+            }
+        },
+        "reserve_date": {
+            "type": "DATE",
+            "code": "reserve_date",
+            "label": "予約受付日",
+            "noLabel": false,
+            "required": true,
+            "unique": false,
+            "defaultValue": "",
+            "defaultNowValue": true
+        },
+        "contract_time": {
+            "type": "DATE",
+            "code": "contract_time",
+            "label": "問い合わせ日時",
+            "noLabel": false,
+            "required": false,
+            "unique": false,
+            "defaultValue": "",
+            "defaultNowValue": true
+        },
+        "staff_memo": {
+            "type": "MULTI_LINE_TEXT",
+            "code": "staff_memo",
+            "label": "内部メモ（スタッフ用）",
+            "noLabel": false,
+            "required": false,
+            "defaultValue": ""
+        },
+        "Updated_datetime": {
+            "type": "UPDATED_TIME",
+            "code": "Updated_datetime",
+            "label": "Updated datetime",
+            "noLabel": false
+        },
+        "customer_name": {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "customer_name",
+            "label": "氏名",
+            "noLabel": false,
+            "required": false,
+            "minLength": "",
+            "maxLength": "",
+            "expression": "",
+            "hideExpression": false,
+            "unique": false,
+            "defaultValue": ""
+        },
+        "adult": {
+            "type": "NUMBER",
+            "code": "adult",
+            "label": "宿泊人数（大人）",
+            "noLabel": false,
+            "required": true,
+            "minValue": "1",
+            "maxValue": "",
+            "digit": false,
+            "unique": false,
+            "defaultValue": "",
+            "displayScale": "",
+            "unit": "",
+            "unitPosition": "BEFORE"
+        },
+        "child": {
+            "type": "NUMBER",
+            "code": "child",
+            "label": "宿泊人数（子供）",
+            "noLabel": false,
+            "required": false,
+            "minValue": "0",
+            "maxValue": "",
+            "digit": false,
+            "unique": false,
+            "defaultValue": "0",
+            "displayScale": "",
+            "unit": "",
+            "unitPosition": "BEFORE"
+        },
+        "status": {
+            "type": "DROP_DOWN",
+            "code": "status",
+            "label": "対応状況",
+            "noLabel": false,
+            "required": true,
+            "options": {
+                "完了": {
+                    "label": "完了",
+                    "index": "2"
+                },
+                "未対応": {
+                    "label": "未対応",
+                    "index": "0"
+                },
+                "キャンセル": {
+                    "label": "キャンセル",
+                    "index": "3"
+                },
+                "対応中": {
+                    "label": "対応中",
+                    "index": "1"
+                }
+            },
+            "defaultValue": "未対応"
+        },
+        "room_type": {
+            "type": "SINGLE_LINE_TEXT",
+            "code": "room_type",
+            "label": "部屋タイプ",
+            "noLabel": false,
+            "required": true,
+            "minLength": "",
+            "maxLength": "",
+            "expression": "",
+            "hideExpression": false,
+            "unique": false,
+            "defaultValue": ""
         }
     }
 }

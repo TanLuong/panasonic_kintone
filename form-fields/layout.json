@@ -5,9 +5,29 @@
             "fields": [
                 {
                     "type": "LABEL",
-                    "label": "<div><b><font size=\"4\">PROJECT INFORMATION</font></b></div>",
+                    "label": "<div><div class=\"user-token-section-title\" style=\"margin:0px 0px 15px;padding:10px 15px;font-family:&#39;hiragino sans&#39; , , &#39;yu gothic&#39; , , &#39;meiryo&#39; , , sans-serif;background:rgb( 248 , 249 , 250 );border:1px solid rgb( 221 , 221 , 221 );font-weight:bold\"><font size=\"4\">顧客検索</font></div><div class=\"user-token-form-row\" style=\"margin:0px 0px 15px;padding:0px;font-family:&#39;hiragino sans&#39; , , &#39;yu gothic&#39; , , &#39;meiryo&#39; , , sans-serif;color:rgb( 0 , 0 , 0 );font-size:medium\"><div class=\"user-token-form-group\" style=\"margin:0px 20px 0px 0px;padding:0px\"></div></div></div>",
                     "size": {
-                        "width": "248"
+                        "width": "588"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "LINK",
+                    "code": "customer_search",
+                    "size": {
+                        "width": "366"
+                    }
+                },
+                {
+                    "type": "SPACER",
+                    "elementId": "customer_element",
+                    "size": {
+                        "width": "222",
+                        "height": "85"
                     }
                 }
             ]
@@ -17,23 +37,40 @@
             "fields": [
                 {
                     "type": "SINGLE_LINE_TEXT",
-                    "code": "RECORD_NO",
+                    "code": "customer_name",
                     "size": {
-                        "width": "117"
+                        "width": "286"
                     }
                 },
                 {
-                    "type": "USER_SELECT",
-                    "code": "User_selection",
+                    "type": "LINK",
+                    "code": "mobile_phone",
                     "size": {
-                        "width": "347"
+                        "width": "302"
                     }
-                },
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
                 {
-                    "type": "ORGANIZATION_SELECT",
-                    "code": "Department_selection_PPH",
+                    "type": "SINGLE_LINE_TEXT",
+                    "code": "address",
                     "size": {
-                        "width": "344"
+                        "width": "588"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "LABEL",
+                    "label": "<div><div class=\"user-token-section-title\" style=\"margin:0px 0px 15px;padding:10px 15px;font-family:&#39;hiragino sans&#39; , , &#39;yu gothic&#39; , , &#39;meiryo&#39; , , sans-serif;background:rgb( 248 , 249 , 250 );border:1px solid rgb( 221 , 221 , 221 );font-weight:bold\"><font size=\"4\">宿泊情報</font></div><div class=\"user-token-form-row\" style=\"margin:0px 0px 15px;padding:0px;font-family:&#39;hiragino sans&#39; , , &#39;yu gothic&#39; , , &#39;meiryo&#39; , , sans-serif;color:rgb( 0 , 0 , 0 );font-size:medium\"><div class=\"user-token-form-group\" style=\"margin:0px 20px 0px 0px;padding:0px\"></div></div></div>",
+                    "size": {
+                        "width": "588"
                     }
                 }
             ]
@@ -43,37 +80,23 @@
             "fields": [
                 {
                     "type": "DATE",
-                    "code": "Date",
+                    "code": "check_in",
                     "size": {
-                        "width": "117"
+                        "width": "193"
                     }
                 },
                 {
-                    "type": "DROP_DOWN",
-                    "code": "region",
+                    "type": "DATE",
+                    "code": "check_out",
                     "size": {
-                        "width": "158"
+                        "width": "193"
                     }
                 },
                 {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "Customer_data_PPH",
+                    "type": "CALC",
+                    "code": "night",
                     "size": {
-                        "width": "381"
-                    }
-                },
-                {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "Lookup_0",
-                    "size": {
-                        "width": "361"
-                    }
-                },
-                {
-                    "type": "SINGLE_LINE_TEXT",
-                    "code": "Project_name_PPH",
-                    "size": {
-                        "width": "242"
+                        "width": "202"
                     }
                 }
             ]
@@ -82,17 +105,25 @@
             "type": "ROW",
             "fields": [
                 {
-                    "type": "DROP_DOWN",
-                    "code": "Industry_PPH",
+                    "type": "SPACER",
+                    "elementId": "room_type",
                     "size": {
-                        "width": "196"
+                        "width": "280",
+                        "height": "66"
                     }
                 },
                 {
-                    "type": "DROP_DOWN",
-                    "code": "Runrate_PPH",
+                    "type": "SINGLE_LINE_TEXT",
+                    "code": "room_type",
                     "size": {
-                        "width": "196"
+                        "width": "286"
+                    }
+                },
+                {
+                    "type": "NUMBER",
+                    "code": "room_number",
+                    "size": {
+                        "width": "302"
                     }
                 }
             ]
@@ -101,9 +132,24 @@
             "type": "ROW",
             "fields": [
                 {
-                    "type": "HR",
+                    "type": "NUMBER",
+                    "code": "adult",
                     "size": {
-                        "width": "863"
+                        "width": "193"
+                    }
+                },
+                {
+                    "type": "NUMBER",
+                    "code": "child",
+                    "size": {
+                        "width": "193"
+                    }
+                },
+                {
+                    "type": "NUMBER",
+                    "code": "price",
+                    "size": {
+                        "width": "202"
                     }
                 }
             ]
@@ -113,10 +159,36 @@
             "fields": [
                 {
                     "type": "LABEL",
-                    "label": "<div><b><font size=\"4\">PROJECT</font></b></div>",
+                    "label": "<div><div class=\"user-token-section-title\" style=\"margin:0px 0px 15px;padding:10px 15px;font-family:&#39;hiragino sans&#39; , , &#39;yu gothic&#39; , , &#39;meiryo&#39; , , sans-serif;background:rgb( 248 , 249 , 250 );border:1px solid rgb( 221 , 221 , 221 );font-weight:bold\"><font size=\"4\">予約情報</font></div><div class=\"user-token-form-row\" style=\"margin:0px 0px 15px;padding:0px;font-family:&#39;hiragino sans&#39; , , &#39;yu gothic&#39; , , &#39;meiryo&#39; , , sans-serif;color:rgb( 0 , 0 , 0 );font-size:medium\"><div class=\"user-token-form-group\" style=\"margin:0px 20px 0px 0px;padding:0px\"></div></div></div>",
+                    "size": {
+                        "width": "582"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "DATE",
+                    "code": "reserve_date",
                     "size": {
                         "width": "117"
                     }
+                },
+                {
+                    "type": "DROP_DOWN",
+                    "code": "reservation_chanel",
+                    "size": {
+                        "width": "169"
+                    }
+                },
+                {
+                    "type": "RADIO_BUTTON",
+                    "code": "payment_method",
+                    "size": {
+                        "width": "302"
+                    }
                 }
             ]
         },
@@ -125,34 +197,16 @@
             "fields": [
                 {
                     "type": "DROP_DOWN",
-                    "code": "Status_PPH",
+                    "code": "payment_detail",
                     "size": {
-                        "width": "171"
+                        "width": "286"
                     }
                 },
                 {
                     "type": "DROP_DOWN",
-                    "code": "probability",
+                    "code": "payment_status",
                     "size": {
-                        "width": "150"
-                    }
-                },
-                {
-                    "type": "DROP_DOWN",
-                    "code": "psi",
-                    "size": {
-                        "width": "143"
-                    }
-                }
-            ]
-        },
-        {
-            "type": "ROW",
-            "fields": [
-                {
-                    "type": "HR",
-                    "size": {
-                        "width": "951"
+                        "width": "302"
                     }
                 }
             ]
@@ -162,124 +216,9 @@
             "fields": [
                 {
                     "type": "LABEL",
-                    "label": "<div><b><font size=\"4\">PRICING</font></b></div>",
+                    "label": "<div><div class=\"user-token-section-title\" style=\"margin:0px 0px 15px;padding:10px 15px;font-family:&#39;hiragino sans&#39; , , &#39;yu gothic&#39; , , &#39;meiryo&#39; , , sans-serif;background:rgb( 248 , 249 , 250 );border:1px solid rgb( 221 , 221 , 221 );font-weight:bold\"><span style=\"font-family:&#39;hiragino sans&#39; , , &#39;yu gothic&#39; , , &#39;meiryo&#39; , , sans-serif\"><font size=\"4\">特記事項</font></span></div><div class=\"user-token-form-row\" style=\"margin:0px 0px 15px;padding:0px;font-family:&#39;hiragino sans&#39; , , &#39;yu gothic&#39; , , &#39;meiryo&#39; , , sans-serif;color:rgb( 0 , 0 , 0 );font-size:medium\"><div class=\"user-token-form-group\" style=\"margin:0px 20px 0px 0px;padding:0px\"></div></div></div>",
                     "size": {
-                        "width": "107"
-                    }
-                }
-            ]
-        },
-        {
-    "type": "SUBTABLE",
-    "code": "table",
-    "fields": [
-        {
-            "type": "NUMBER",
-            "code": "No_t",
-            "size": {
-                "width": "62"
-            }
-        },
-        {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "product_type_t",
-            "size": {
-                "width": "214"
-            }
-        },
-        {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "model_t",
-            "size": {
-                "width": "246"
-            }
-        },
-        {
-            "type": "DROP_DOWN",
-            "code": "currency_t",
-            "size": {
-                "width": "116"
-            }
-        },
-        {
-            "type": "NUMBER",
-            "code": "quantity_t",
-            "size": {
-                "width": "114"
-            }
-        },
-        {
-            "type": "NUMBER",
-            "code": "usd_price_t",
-            "size": {
-                "width": "200"
-            }
-        },
-        {
-            "type": "CALC",
-            "code": "Calculated",
-            "size": {
-                "width": "193"
-            }
-        },
-        {
-            "type": "DATE",
-            "code": "sale_date_t",
-            "size": {
-                "width": "117"
-            }
-        },
-        {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "financial_year_t",
-            "size": {
-                "width": "193"
-            }
-        },
-        {
-            "type": "DROP_DOWN",
-            "code": "quarter_t",
-            "size": {
-                "width": "116"
-            }
-        },
-        {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "sale_month_year_t",
-            "size": {
-                "width": "163"
-            }
-        },
-        {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "po_no",
-            "size": {
-                "width": "193"
-            }
-        },
-        {
-            "type": "SINGLE_LINE_TEXT",
-            "code": "deal_no",
-            "size": {
-                "width": "193"
-            }
-        },
-        {
-            "type": "DROP_DOWN",
-            "code": "delivary_status",
-            "size": {
-                "width": "132"
-            }
-        }
-    ]
-},
-        {
-            "type": "ROW",
-            "fields": [
-                {
-                    "type": "HR",
-                    "size": {
-                        "width": "951"
+                        "width": "588"
                     }
                 }
             ]
@@ -289,17 +228,59 @@
             "fields": [
                 {
                     "type": "MULTI_LINE_TEXT",
-                    "code": "Text_area",
+                    "code": "customer_memo",
                     "size": {
-                        "width": "513",
+                        "width": "286",
                         "innerHeight": "125"
                     }
                 },
                 {
-                    "type": "FILE",
-                    "code": "Attachment",
+                    "type": "MULTI_LINE_TEXT",
+                    "code": "staff_memo",
                     "size": {
-                        "width": "207"
+                        "width": "302",
+                        "innerHeight": "125"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "REFERENCE_TABLE",
+                    "code": "memos"
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "LABEL",
+                    "label": "<div><div class=\"user-token-section-title\" style=\"margin:0px 0px 15px;padding:10px 15px;background:rgb( 248 , 249 , 250 );border:1px solid rgb( 221 , 221 , 221 )\"><font size=\"4\"><b>対応履歴</b></font></div><div class=\"user-token-form-row\" style=\"margin:0px 0px 15px;padding:0px;color:rgb( 0 , 0 , 0 );font-size:medium\"><div class=\"user-token-form-group\" style=\"margin:0px 20px 0px 0px;padding:0px\"></div></div></div>",
+                    "size": {
+                        "width": "588"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "ROW",
+            "fields": [
+                {
+                    "type": "DATE",
+                    "code": "contract_time",
+                    "size": {
+                        "width": "134"
+                    }
+                },
+                {
+                    "type": "MULTI_LINE_TEXT",
+                    "code": "contract_content",
+                    "size": {
+                        "width": "441",
+                        "innerHeight": "125"
                     }
                 }
             ]
@@ -309,90 +290,20 @@
             "fields": [
                 {
                     "type": "USER_SELECT",
-                    "code": "Purchase_approvalPPH_0",
+                    "code": "responsive_staff",
                     "size": {
                         "width": "344"
                     }
                 },
                 {
-                    "type": "CHECK_BOX",
-                    "code": "Purchase_stock_approvalPPH_0",
+                    "type": "DROP_DOWN",
+                    "code": "status",
                     "size": {
-                        "width": "282"
-                    }
-                }
-            ]
-        },
-        {
-            "type": "ROW",
-            "fields": [
-                {
-                    "type": "USER_SELECT",
-                    "code": "Purchase_approvalPPH",
-                    "size": {
-                        "width": "344"
-                    }
-                },
-                {
-                    "type": "CHECK_BOX",
-                    "code": "Purchase_stock_approvalPPH",
-                    "size": {
-                        "width": "282"
-                    }
-                }
-            ]
-        },
-        {
-            "type": "ROW",
-            "fields": [
-                {
-                    "type": "USER_SELECT",
-                    "code": "Costing_sheet_approver",
-                    "size": {
-                        "width": "344"
-                    }
-                },
-                {
-                    "type": "CHECK_BOX",
-                    "code": "Special_price",
-                    "size": {
-                        "width": "282"
-                    }
-                }
-            ]
-        },
-        {
-            "type": "ROW",
-            "fields": [
-                {
-                    "type": "CREATOR",
-                    "code": "Created_by",
-                    "size": {
-                        "width": "136"
-                    }
-                },
-                {
-                    "type": "CREATED_TIME",
-                    "code": "Created_datetime",
-                    "size": {
-                        "width": "196"
-                    }
-                },
-                {
-                    "type": "UPDATED_TIME",
-                    "code": "Updated_datetime",
-                    "size": {
-                        "width": "196"
-                    }
-                },
-                {
-                    "type": "MODIFIER",
-                    "code": "Updated_by",
-                    "size": {
-                        "width": "136"
+                        "width": "231"
                     }
                 }
             ]
         }
-    ]
+    ],
+    "revision": "95"
 }

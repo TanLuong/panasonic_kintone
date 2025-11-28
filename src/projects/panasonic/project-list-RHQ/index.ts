@@ -5,7 +5,7 @@ import { AnyAaaaRecord } from "node:dns";
 
 declare const kintone: any;
 declare const krewsheet: any;
-declare const EXCHANGE_APP_ID: number
+declare const EXCHANGE_APP_ID: number;
 interface ExchangeRateRecord {
   rate: { value: string };
   year: { value: string };
@@ -39,7 +39,6 @@ interface ExchangeRateMap {
     noInTable,
     saleMonthTable,
     exchangeRateInTable,
-    currencyInTable,
     financialYearInTable
   ]
 
@@ -68,6 +67,30 @@ interface ExchangeRateMap {
     return event;
   });
 
+
+  const currencyChangeEvent: string[] = [
+    `app.record.create.change.${currencyInTable}`,
+    `app.record.edit.change.${currencyInTable}`,
+    `app.record.index.edit.change.${currencyInTable}`,
+  ]
+
+  kintone.events.on(currencyChangeEvent, (event: any) => {
+    let record = event.record;
+
+    // Update quarter belong sale date
+    let numberRow = record[tableField].value.length;
+    for (let i = 0; i < numberRow; i++) {
+      if (record[tableField].value[i].value[currencyInTable].value == 'USD') {
+        record[tableField].value[i].value[USDPrice].disabled = false
+        record[tableField].value[i].value[SGDPrice].disabled = true
+      } else {
+        record[tableField].value[i].value[USDPrice].disabled = true
+        record[tableField].value[i].value[SGDPrice].disabled = false
+      }
+    }
+    return event;
+  });
+
   const probilityChangeEvents: string[] = [
     `app.record.create.change.${probability}`,
     `app.record.edit.change.${probability}`,
@@ -87,19 +110,20 @@ interface ExchangeRateMap {
   ]
   kintone.events.on(regionChangeEvents, (event: any) => {
     let record = event.record;
-
     // Disable table fields and set up value in table
     let numberRow = record[tableField].value.length;
     for (let i = 0; i < numberRow; i++) {
-      if (record[region].value == "Singapore") {
-        record[tableField].value[i].value[currencyInTable].value = "SGD"
-        record[tableField].value[i].value[USDPrice].disabled = true
-        record[tableField].value[i].value[SGDPrice].disabled = false
+      if (record[region].value === 'Singapore') {
+        record[tableField].value[i].value[currencyInTable].disabled = false
+      } else {
+        record[tableField].value[i].value[currencyInTable].disabled = true
+        record[tableField].value[i].value[currencyInTable].value = 'USD'
       }
-      else {
-        record[tableField].value[i].value[currencyInTable].value = "USD"
-        record[tableField].value[i].value[USDPrice].disabled = false
+
+      if (record[tableField].value[i].value[currencyInTable].value == 'USD') {
         record[tableField].value[i].value[SGDPrice].disabled = true
+      } else {
+        record[tableField].value[i].value[USDPrice].disabled = true
       }
     }
 
@@ -119,6 +143,7 @@ interface ExchangeRateMap {
   ]
 
   kintone.events.on(showEvents, function (event: any) {
+    console.log(event.type)
     var record = event.record;
     disableField(record, disableFields);
     record.psi.value = PSI(record.probability.value);
@@ -130,17 +155,17 @@ interface ExchangeRateMap {
       let rowDate = new Date(record[tableField].value[i].value[saleDateTable].value);
       record[tableField].value[i].value[quarterInTable].value = quarter(rowDate.getMonth() + 1);
       record[tableField].value[i].value[financialYearInTable].value = financialYear(rowDate);
-
-      if (record[region].value == "Singapore") {
-        record[tableField].value[i].value[currencyInTable].value = "SGD"
-        record[tableField].value[i].value[USDPrice].disabled = true
-        record[tableField].value[i].value[SGDPrice].disabled = false
+      if (record[region].value === 'Singapore') {
+        record[tableField].value[i].value[currencyInTable].disabled = false
+      } else {
+        record[tableField].value[i].value[currencyInTable].disabled = true
+        record[tableField].value[i].value[currencyInTable].value = 'USD'
       }
-      else {
-        record[tableField].value[i].value[currencyInTable].value = "USD"
-        record[tableField].value[i].value[USDPrice].disabled = false
+
+      if (record[tableField].value[i].value[currencyInTable].value == 'USD') {
         record[tableField].value[i].value[SGDPrice].disabled = true
-        record[tableField].value[i].value[exchangeRateInTable].value = 0
+      } else {
+        record[tableField].value[i].value[USDPrice].disabled = true
       }
     }
     return event;
@@ -257,4 +282,27 @@ interface ExchangeRateMap {
       return event;
     });
   });
+
+  const editShowEvent = [
+    'app.record.index.edit.show',
+    'app.record.edit.show'
+  ]
+
+  kintone.events.on(editShowEvent, function (e: any) {
+    console.log
+    const record = e.record;
+    let numberRow = record[tableField].value.length;
+    let existSGD = false;
+    for (let i = 0; i < numberRow; i++) {
+      if (
+        record[tableField].value[i].value[currencyInTable].value != "USD"
+      ) {
+        existSGD = true;
+        break;
+      }
+    }
+    if (existSGD && record[region].value === "Singapore") record[region].disabled = true;
+    return e;
+  });
+
 })();
