@@ -1,6 +1,7 @@
 import { Button } from "kintone-ui-component";
-
+import { findAllFieldRoutes, getElementOfFieldCode } from "../../../common/kintone-tools";
 declare const CUSTOMER_APP_ID: number;
+declare const kintone: any;
 
 (function () {
     ('use strict');
@@ -10,17 +11,22 @@ declare const CUSTOMER_APP_ID: number;
         'app.record.edit.show',
     ]
 
-    kintone.events.on(showEvents, function (e: any) {
-        const customerElement: HTMLElement = kintone.app.record.getSpaceElement(customerElementID)
-        const redirectCustomerButton = new Button({
-            type: "submit",
-            text: "新規顧客登録",
-        })
-        redirectCustomerButton.addEventListener('click', () => {
-            window.open(`/k/${CUSTOMER_APP_ID}/edit`, '_self' )
-        })
-        customerElement.appendChild(redirectCustomerButton)
-        customerElement.style = 'display: flex; justify-content: center;'
+    kintone.events.on(showEvents, async (e: any) => {
+        const fieldLayout = await kintone.app.getFormLayout();
+        const routeMap = findAllFieldRoutes(fieldLayout);
+        const mobileElement = await getElementOfFieldCode('mobile_phone', routeMap);
+        const phoneElement = await getElementOfFieldCode('desk_phone', routeMap);
+        if (mobileElement) {
+            const mobileInputElement = mobileElement.querySelector('input');
+            mobileInputElement?.setAttribute('placeholder', 'ハイフンなし');
+        }
+        if (phoneElement) {
+            const phoneInputElement = phoneElement.querySelector('input');
+            phoneInputElement?.setAttribute('placeholder', 'ハイフンなし');
+        }
+        console.log('routeMap', routeMap);
+        console.log('mobileElement', mobileElement);
+        console.log('phoneElement', phoneElement);
         return e
     });
 })();

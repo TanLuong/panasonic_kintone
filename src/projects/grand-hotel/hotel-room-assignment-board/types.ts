@@ -2,7 +2,8 @@
 export enum RoomStatus {
   Occupied = 'Occupied',
   Available = 'Available',
-  Cleaning = 'Cleaning',
+  CheckedOut = 'Checked Out',
+  NotSupported = 'Not Supported',
 }
 
 export enum PaymentStatus {
@@ -24,6 +25,7 @@ export interface Guest {
   nights: number;
   price: number;
   paymentStatus: PaymentStatus;
+  id: number;
 }
 
 export interface Room {

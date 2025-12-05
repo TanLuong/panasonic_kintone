@@ -8,7 +8,8 @@ export const mockRooms: Room[] = [];
 export const textDict = {
     [RoomStatus.Occupied]: '宿泊中',
     [RoomStatus.Available]: '空室',
-    [RoomStatus.Cleaning]: '清掃中',
+    [RoomStatus.CheckedOut]: 'チェックアウト済み',
+    [RoomStatus.NotSupported]: '未対応',
     [PaymentStatus.Prepaid]: '事前決済済',
     [PaymentStatus.Onsite]: '現地支払い',
     header_summary: "今月の部屋割り状況",

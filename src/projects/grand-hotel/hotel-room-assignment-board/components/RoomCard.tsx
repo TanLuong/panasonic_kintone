@@ -4,6 +4,7 @@ import './RoomCard.css';
 import { Room, RoomStatus, PaymentStatus } from '../types';
 import { textDict } from '../app_constants';
 
+declare const CUSTOMER_APP_ID: number;
 interface RoomCardProps {
   room: Room;
 }
@@ -11,7 +12,8 @@ interface RoomCardProps {
 const statusStyles: { [key in RoomStatus]: string } = {
   [RoomStatus.Occupied]: 'status-occupied',
   [RoomStatus.Available]: 'status-available',
-  [RoomStatus.Cleaning]: 'status-cleaning',
+  [RoomStatus.NotSupported]: 'status-cleaning',
+  [RoomStatus.CheckedOut]: 'status-cleaning',
 };
 
 const paymentStatusStyles: { [key in PaymentStatus]: string } = {
@@ -20,6 +22,7 @@ const paymentStatusStyles: { [key in PaymentStatus]: string } = {
 };
 
 const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
+  const link = `/k/${CUSTOMER_APP_ID}/show#record=${room?.guest?.id}`
   return (
     <div className="room-card">
       <div className="room-card-header">
@@ -32,10 +35,13 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
         </span>
       </div>
       <div className="room-card-body">
-        {room.status === RoomStatus.Occupied && room.guest ? (
+        {room.status != RoomStatus.Available && room.guest ? (
           <div>
             <div className="guest-info">
-              <h4 className="guest-name">{room.guest.name}</h4>
+              <h4 className="guest-name">{
+                room?.guest?.id ? <a href={link}>{room.guest.name}</a> : room.guest.name
+                }
+              </h4>
               <div className="guest-meta">
                 <span>{textDict['adults']}: {room.guest.adults}{textDict['person_unit']}</span>
                 <span>{room.guest.nights}{textDict['nights']}</span>

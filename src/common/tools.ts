@@ -136,3 +136,9 @@ export const getDifferentDate = (date1: string, date2: string) => {
   const millisecondsPerDay = 1000 * 60 * 60 * 24;
   return (date2Object.getTime() - date1Object.getTime()) / millisecondsPerDay
 }
+
+export const greaterDate = (date1: string, date2: string) => {
+  const date1Object = new Date(date1);
+  const date2Object = new Date(date2);
+  return date1Object > date2Object;
+}

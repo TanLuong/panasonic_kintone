@@ -13,12 +13,6 @@ const parseEnv = z.object({
             (id) => parseInt(id) > 0,
             "Invalid number"
         ),
-    ROOM_LIST_VIEW_ID: z
-        .string()
-        .refine(
-            (id) => parseInt(id) > 0,
-            "Invalid number"
-        ),
     ROOM_LIST_APP_ID: z
         .string()
         .refine(

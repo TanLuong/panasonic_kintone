@@ -11,7 +11,6 @@ if (entry.split("/").length < 3) {
   process.exit(1);
 }
 const pathInfo = parse(entry);
-const outfile = entry.split("/")[1];
 const isProd = process.argv.includes("--prod");
 const ENV_VARIABLE = {}
 
@@ -35,7 +34,7 @@ console.log('ENV:', ENV_VARIABLE)
 const buildOptions = {
   entryPoints: [entry],
   bundle: true,
-  minify: isProd,
+  minify: isProd || process.argv.includes("--mini"),
   sourcemap: !isProd,
   outfile: `dist/${pathInfo.dir.replace(/\//g, '_')}/index.js`,
   platform: "browser",

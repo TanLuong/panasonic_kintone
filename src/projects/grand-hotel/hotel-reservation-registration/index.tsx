@@ -2,7 +2,6 @@ import { createRoot } from "react-dom/client";
 
 import { Button, Combobox } from "kintone-ui-component";
 import { summaryElement } from "./logic/reservation-list";
-import App from "./react/hotel-room-assignment-board/App";
 import { getOptionsOfField, createDatalist, getDifferentDate } from "../../../common/tools";
 import * as fields from "./fields";
 
@@ -79,28 +78,6 @@ declare const ROOM_LIST_APP_ID: number;
             
         }
 
-        if (e.viewId == ROOM_LIST_VIEW_ID) {
-            const container = document.getElementById('root')
-            if (!container) {
-                e.error = 'Container element not found';
-            }
-
-            const root = createRoot(container!);
-            root.render(<App />);
-            const headerSpace = kintone.app.getHeaderMenuSpaceElement();
-
-            let print = document.getElementById("print-button");
-            if (!print) {
-                print = new Button({
-                    type: "submit",
-                    text: "印刷",
-                })
-            }
-            print.addEventListener('click', () => {
-                window.print();
-            })
-            headerSpace.appendChild(print);
-        }
         return e;
     })
 
@@ -150,4 +127,15 @@ declare const ROOM_LIST_APP_ID: number;
         }
         return e
     })
+
+    const hideCustomerIdEvents: string[] = [
+        'app.record.create.show',
+        'app.record.edit.show',
+        'app.record.detail.show',
+    ]
+
+    kintone.events.on(hideCustomerIdEvents, (e: any) => {
+        kintone.app.record.setFieldShown(fields.customer_id, false);
+        return e
+    });
 })();

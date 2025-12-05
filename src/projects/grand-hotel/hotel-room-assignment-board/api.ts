@@ -1,7 +1,7 @@
 import { Room, RoomStatus, PaymentStatus, Guest } from './types';
 import * as fields from './fields';
 import { getRecords } from '../../../common/tools';
-import { textDict } from './app_constants';
+import { getFormattedDate, greaterDate } from '../../../common/tools';
 
 // Declare Kintone global object to satisfy TypeScript
 declare const kintone: any;
@@ -39,6 +39,7 @@ const mergeRoomData = (reservationRecords: any[], roomRecords: any[]): any[] => 
                 room_number: roomRecord[fields.room_number].value,
                 room_type: roomRecord[fields.room_type].value,
                 customer_name: reservation[fields.customer_name].value,
+                customer_id: reservation[fields.customer_id]?.value || '',
                 memos: agregateMemos.join(', '),
                 check_in: reservation[fields.check_in].value,
                 check_out: reservation[fields.check_out].value,
@@ -62,6 +63,16 @@ const mergeRoomData = (reservationRecords: any[], roomRecords: any[]): any[] => 
 const mapDataToRooms = (data: any[]): Room[] => {
     return data.map((record, index) => {
         const isOccupied = !!record.customer_name;
+        let currentDate = new Date();
+        let status = RoomStatus.Available;
+        if (isOccupied && greaterDate(getFormattedDate(currentDate), record.check_out)) {
+            status = RoomStatus.CheckedOut;
+        } else if (isOccupied && greaterDate(record.check_in, getFormattedDate(currentDate))) {
+            status = RoomStatus.NotSupported;
+        } else if (isOccupied) {
+            status = RoomStatus.Occupied;
+        }
+
 
         let guest: Guest | undefined = undefined;
         if (isOccupied) {
@@ -77,6 +88,7 @@ const mapDataToRooms = (data: any[]): Room[] => {
                 nights: parseInt(record.night || '0', 10),
                 price: parseInt(record.price || '0', 10),
                 paymentStatus: paymentStatus,
+                id: record.customer_id || 0,
             };
         }
         
@@ -84,7 +96,7 @@ const mapDataToRooms = (data: any[]): Room[] => {
             id: index + 1, // Using index as a stable key for React
             roomNumber: record.room_number,
             type: record.room_type,
-            status: isOccupied ? RoomStatus.Occupied : RoomStatus.Available,
+            status,
             guest: guest,
             notes: isOccupied ? {
                 checkIn: record.check_in || '',
