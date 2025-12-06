@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "@types/node": "^24.7.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
@@ -12,7 +13,11 @@
     "build-exchange-rate-dev": "node build.js src/exchange-rate/index.ts",
     "build-exchange-rate-prod": "node build.js src/exchange-rate/index.ts",
     "build-report-dev": "node build.js src/report/index.ts",
-    "build-project-list-common": "node build.js src/project-list-common/index.ts"
+    "build-project-list-common": "node build.js src/project-list-common/index.ts",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "dotenv": "^17.2.3",

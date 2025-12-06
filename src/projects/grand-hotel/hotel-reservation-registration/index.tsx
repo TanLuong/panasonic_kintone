@@ -1,10 +1,13 @@
+
 import { createRoot } from "react-dom/client";
-
-import { Button, Combobox } from "kintone-ui-component";
-import { summaryElement } from "./logic/reservation-list";
-import { getOptionsOfField, createDatalist, getDifferentDate } from "../../../common/tools";
-import * as fields from "./fields";
-
+import { 
+    handleShow,
+    handleIndexShow,
+    handleDetailShow,
+    handleIndexEditShow,
+    handleSubmit,
+    handleHideCustomer
+} from "./handlers";
 
 declare const CUSTOMER_APP_ID: number;
 declare const RESERVATION_VIEW_ID: number;
@@ -12,130 +15,61 @@ declare const kintone: any;
 declare const ROOM_LIST_VIEW_ID: number;
 declare const ROOM_LIST_APP_ID: number;
 
+
 (function () {
     ('use strict');
-    const customerElementID = 'customer_element'
-    const roomTypeElementID = 'room_type'
+    
+    // Show Events
     const showEvents: string[] = [
         'app.record.create.show',
         'app.record.edit.show',
     ]
-
     kintone.events.on(showEvents, async (e: any) => {
-        const record = e.record;
-        kintone.app.record.setFieldShown(fields.room_type, false);
-        const customerElement: HTMLElement = kintone.app.record.getSpaceElement(customerElementID)
-        const redirectCustomerButton = new Button({
-            type: "submit",
-            text: "新規顧客登録",
-        })
-        redirectCustomerButton.addEventListener('click', () => {
-            window.open(`/k/${CUSTOMER_APP_ID}/edit`, '_self')
-        })
-        customerElement.appendChild(redirectCustomerButton)
-        customerElement.style = 'display: flex; justify-content: center;'
-
-        // 
-        const optionItems = await getOptionsOfField(ROOM_LIST_APP_ID, fields.room_type);
-        const roomTypeElement: HTMLElement = kintone.app.record.getSpaceElement(roomTypeElementID)
-        const roomtypeDropdown = new Combobox({
-            label: '部屋タイプ',
-            items: [{label: '-------------------------------', value:''}, ...optionItems.map((option: any) => ({ label: option, value: option }))],
-            value: record[fields.room_type].value ?? '',
-            requiredIcon: true,
-            className: 'options-class',
-            id: 'options-id',
-            visible: true,
-            disabled: false,
-            placeholder: '部屋タイプを選択してください',
-        })
-        roomtypeDropdown.addEventListener('change', (e:any) => {
-            let record = kintone.app.record.get();
-            record.record['room_type'].value = e?.detail?.value;
-            kintone.app.record.set(record);
-        })
-        roomTypeElement.appendChild(roomtypeDropdown)
-        return e
+        return handleShow(e, CUSTOMER_APP_ID, ROOM_LIST_APP_ID);
     });
 
+    // Index Show Events
     const indexShow = [
         'app.record.index.show',
     ]
-
     kintone.events.on(indexShow, async (e: any) => {
-        const dataOptions = await getOptionsOfField(ROOM_LIST_APP_ID, fields.room_type);
-        createDatalist(dataOptions, fields.room_type); 
-
-        const appID = e.appId;
-
-        if (e.viewId == RESERVATION_VIEW_ID) {
-            const headerSpace = kintone.app.getHeaderSpaceElement();
-            const summary_el = document.getElementById('summary_month');
-            if (!summary_el) {
-                const el = await summaryElement(appID);
-                headerSpace.appendChild(el);
-            }
-            
-        }
-
-        return e;
+        return handleIndexShow(e, ROOM_LIST_APP_ID, RESERVATION_VIEW_ID);
     })
 
+    // Detail Show Events
     const showDetailEvents: string[] = [
         'app.record.detail.show',
         'mobile.app.record.detail.show',
     ]
     kintone.events.on(showDetailEvents, (e: any) => {
-        const roomTypeElement: HTMLElement = kintone.app.record.getSpaceElement(roomTypeElementID)
-        const parentElement = roomTypeElement.parentElement as HTMLElement;
-        parentElement.style.display = 'none';
-        return e;
+        return handleDetailShow(e);
     });
 
+    // Index Edit Events
     const indexEditEvents: string[] = [
         'app.record.index.edit.show',
     ]
     kintone.events.on(indexEditEvents, (e: any) => {
-        const record = e.record;
-        const roomTypeElementList: HTMLElement[] = kintone.app.getFieldElements(fields.room_type);
-        const roomTypeEditElement = roomTypeElementList.find((element) => {
-            return element.getElementsByTagName('input').length > 0;
-        })
-        const roomTypeInput = roomTypeEditElement?.getElementsByTagName('input')[0] as HTMLInputElement;
-        if (roomTypeInput) {
-            roomTypeInput.setAttribute('list', 'datalist-' + fields.room_type);
-        }
-        if (!!record[fields.room_number].value) {
-            record[fields.room_type].disabled = true;
-        }
-        return e;
+        return handleIndexEditShow(e);
     });
 
+    // Submit Events
     const submitEvents: string[] = [
         'app.record.index.edit.submit',
         'app.record.edit.submit',
         'app.record.create.submit',
     ]
-
     kintone.events.on(submitEvents, (e: any) => {
-        const record = e.record;
-        const night = getDifferentDate(record[fields.check_in].value, record[fields.check_out].value)
-        console.log('night:', night)
-        if (night <= 0) {
-            record[fields.check_out].error = "チェックアウト日はチェックイン日と同じかそれ以前であってはなりません";
-            e.error = "予約日数は0より大きくなければなりません";
-        }
-        return e
+        return handleSubmit(e);
     })
 
+    // Hide Customer ID Events
     const hideCustomerIdEvents: string[] = [
         'app.record.create.show',
         'app.record.edit.show',
         'app.record.detail.show',
     ]
-
     kintone.events.on(hideCustomerIdEvents, (e: any) => {
-        kintone.app.record.setFieldShown(fields.customer_id, false);
-        return e
+        return handleHideCustomer(e);
     });
 })();

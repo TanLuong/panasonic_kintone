@@ -15,3 +15,5 @@ export const payment_method = 'payment_method';
 export const room_description = 'description';
 export const reservation_status = 'status';
 export const customer_id = 'customer_id';
+export const reservation_id = '$id';
+

@@ -5,6 +5,7 @@ import { Room, RoomStatus, PaymentStatus } from '../types';
 import { textDict } from '../app_constants';
 
 declare const CUSTOMER_APP_ID: number;
+declare const RESERVATION_APP_ID: number;
 interface RoomCardProps {
   room: Room;
 }
@@ -22,7 +23,7 @@ const paymentStatusStyles: { [key in PaymentStatus]: string } = {
 };
 
 const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
-  const link = `/k/${CUSTOMER_APP_ID}/show#record=${room?.guest?.id}`
+  const link = `/k/${RESERVATION_APP_ID}/show#record=${room?.guest?.reservationId}`
   return (
     <div className="room-card">
       <div className="room-card-header">
@@ -39,7 +40,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
           <div>
             <div className="guest-info">
               <h4 className="guest-name">{
-                room?.guest?.id ? <a href={link}>{room.guest.name}</a> : room.guest.name
+                room?.guest?.reservationId ? <a href={link}>{room.guest.name}</a> : room.guest.name
                 }
               </h4>
               <div className="guest-meta">

@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+import React from 'react';
 
 import { Summary } from "../react/summary";
 import { getRecords } from "../../../../common/tools";

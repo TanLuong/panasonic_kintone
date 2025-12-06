@@ -49,6 +49,7 @@ const mergeRoomData = (reservationRecords: any[], roomRecords: any[]): any[] => 
                 child: reservation[fields.child].value,
                 price: reservation[fields.price].value,
                 payment_method: reservation[fields.payment_method].value,
+                reservation_id: reservation.$id.value,
             };
         }
         return {
@@ -89,6 +90,7 @@ const mapDataToRooms = (data: any[]): Room[] => {
                 price: parseInt(record.price || '0', 10),
                 paymentStatus: paymentStatus,
                 id: record.customer_id || 0,
+                reservationId: parseInt(record.reservation_id || '0', 10),
             };
         }
         
@@ -120,7 +122,7 @@ export const fetchHotelData = async (reservationAppId: number, roomAppId: number
         app: reservationAppId,
         filterCond: `${fields.check_in} <= "${date}" and ${fields.check_out} >= "${date}" and status in ("完了")`,
         sortConds: [fields.room_number],
-        fields: Object.values(fields),
+        fields: [...Object.values(fields), '$id'],
     });
 
     const roomRequest = getRecords({

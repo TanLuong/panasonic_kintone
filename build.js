@@ -30,13 +30,15 @@ if (fs.existsSync(`./${pathInfo.dir}/.prod.env`) || fs.existsSync(`./${pathInfo.
 
 console.log('ENV:', ENV_VARIABLE)
 
+const outfile = isProd ? `dist/${pathInfo.dir.replace(/\//g, '_')}/index.js` :
+                        `dist/${pathInfo.dir.replace(/\//g, '_')}/dev-index.js`;
 
 const buildOptions = {
   entryPoints: [entry],
   bundle: true,
   minify: isProd || process.argv.includes("--mini"),
   sourcemap: !isProd,
-  outfile: `dist/${pathInfo.dir.replace(/\//g, '_')}/index.js`,
+  outfile,
   platform: "browser",
   define: {
     "process.env.NODE_ENV": `"${isProd ? "production" : "development"}"`,

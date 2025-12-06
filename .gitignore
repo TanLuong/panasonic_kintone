@@ -40,3 +40,10 @@ package-lock.json
 __pycache__
 form-fields/
 deploy/
+
+# auth
+.auth
+.auth-dev
+
+playwright-report/
+test-results/

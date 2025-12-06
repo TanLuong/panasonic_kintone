@@ -26,6 +26,7 @@ export interface Guest {
   price: number;
   paymentStatus: PaymentStatus;
   id: number;
+  reservationId: number;
 }
 
 export interface Room {
