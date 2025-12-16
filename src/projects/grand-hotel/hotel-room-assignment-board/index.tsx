@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import './toolbar.css';
 import App from './App';
 import { getFormattedDate } from '../../../common/tools';
+import { DatePicker } from 'kintone-ui-component';
 
 declare const kintone: any;
 declare const RESERVATION_APP_ID: number;
@@ -35,12 +36,11 @@ kintone.events.on('app.record.index.show', async (e: any) => {
     // insert specifiedDate
     const specifiedDateElement = document.getElementById('date-id');
     if (!specifiedDateElement) {
-      const specifiedDate = document.createElement('input');
-      specifiedDate.type = 'date';
-      specifiedDate.id = 'date-id';
-      specifiedDate.className = 'date-input';
-      specifiedDate.value = getFormattedDate(new Date());
-      specifiedDate.required = true;
+      const specifiedDate = new DatePicker({
+        value: getFormattedDate(new Date()),
+        className: 'date-input',
+        id: 'date-id',
+      });
       
       specifiedDate.addEventListener('change', (event: any) => {
         const container = document.getElementById('root');
