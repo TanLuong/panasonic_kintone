@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 
 import { quarter, PSI, disableField, financialYear } from './function';
 import { AnyAaaaRecord } from "node:dns";
+import { record } from "zod";
 
 declare const kintone: any;
 declare const krewsheet: any;
@@ -268,18 +269,62 @@ interface ExchangeRateMap {
     krewsheet.events.on('app.record.index.edit.submit', function (event: any) {
       let records = event.records;
       console.log("submit event before modify:", event)
-      // if (record.sale_date.value != '') {
-      //   let date = new Date(record.sale_date.value);
-      //   let month = date.toLocaleString('en-US', { month: 'short' });
-      //   record.financial_year.value = financialYear(date);
-      //   record.quarter.value = quarter(date.getMonth() + 1);
-      //   //   record.exchange_rate.value = exchangeRateDictionary[`${month}${date.getFullYear()}`] || '';
-      //   // if (!record.unit_price_in_SGD.value && !record.unit_price_in_USD.value) {
-      //   //     event.error = 'Unit Price is required, please enter value for one of currency';
-      //   // }
-      // }
-      console.log("submit event after modify:", event)
-      return event;
+      let query = [];
+      for (const record of records) {
+        let numberRow = record[tableField].value.length;
+        for (let i = 0; i < numberRow; i++) {
+          // fill No
+          record[tableField].value[i].value[noInTable].value = i + 1;
+          // fill quarter
+          let rowDate = new Date(record[tableField].value[i].value[saleDateTable].value);
+          record[tableField].value[i].value[quarterInTable].value = quarter(rowDate.getMonth() + 1);
+          record[tableField].value[i].value[financialYearInTable].value = financialYear(rowDate);
+          // create query
+          let month = rowDate.toLocaleString('en-US', { month: 'short' });
+          let year = rowDate.getFullYear();
+          query.push(`(year = "${year}" and month in ("${month}"))`)
+        }
+      }
+      if (query.length === 0) return event
+      const body = {
+        app: EXCHANGE_APP_ID,
+        query: query.join(' or '),
+        fields: ['rate', 'year', 'month'],
+      }
+      return kintone.api(kintone.api.url('/k/v1/records.json', true), 'GET', body)
+        .then(function (resp: { records: ExchangeRateRecord[] }) {
+          if (resp.records.length === 0) {
+            return event; // No exchange rate found for the specified date
+          }
+          const exchange_rate_records = resp.records;
+          const exchangeRate = exchange_rate_records.reduce((acc: ExchangeRateMap, rec: ExchangeRateRecord) => {
+            const key = `${rec.month.value}${rec.year.value}`;
+            acc[key] = rec.rate.value;
+            return acc;
+          }, {});
+
+          for (const record of records) {
+            let numberRow = record[tableField].value.length;
+            // update Exchange Rate
+            for (let i = 0; i < numberRow; i++) {
+              let rowDate = new Date(record[tableField].value[i].value[saleDateTable].value);
+              let month = rowDate.toLocaleString('en-US', { month: 'short' });
+              let year = rowDate.getFullYear();
+              if (
+                !record[tableField].value[i].value[exchangeRateInTable].value || 
+                !record[tableField].value[i].id ||
+                `${month}, ${year}` != record[tableField].value[i].value[saleMonthTable].value
+              ) {
+                record[tableField].value[i].value[exchangeRateInTable].value = exchangeRate[`${month}${year}`]
+              }
+            }
+          }
+          return event;
+        })
+        .catch(function (error: any) {
+          console.error('Error fetching exchange rate:', error);
+          return event; // Error fetching exchange rate
+        });
     });
   });
 
