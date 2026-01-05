@@ -1,9 +1,9 @@
 
 export enum RoomStatus {
   Occupied = 'Occupied',
-  Available = 'Available',
   CheckedOut = 'Checked Out',
   NotSupported = 'Not Supported',
+  NotCheckedIn = 'Not Checked In',
 }
 
 export enum PaymentStatus {
@@ -12,10 +12,10 @@ export enum PaymentStatus {
 }
 
 export enum ReservationStatus {
-  Unprocessed = '未対応',
-  InProgress = '対応中',
-  Completed = '完了',
-  Cancelled = 'キャンセル',
+  not_yet_paid = "未支払い",
+  paid_not_yet_checkin = "支払い済み、未チェックイン",
+  paid_checking = "支払い済み＆チェックイン済み",
+  cancelled = "キャンセル",
 }
 
 export interface Guest {

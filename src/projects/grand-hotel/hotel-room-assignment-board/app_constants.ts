@@ -7,9 +7,9 @@ export const mockRooms: Room[] = [];
 
 export const textDict = {
     [RoomStatus.Occupied]: '宿泊中',
-    [RoomStatus.Available]: '空室',
     [RoomStatus.CheckedOut]: 'チェックアウト済み',
     [RoomStatus.NotSupported]: '未対応',
+    [RoomStatus.NotCheckedIn]: '未チェックイン',
     [PaymentStatus.Prepaid]: '事前決済済',
     [PaymentStatus.Onsite]: '現地支払い',
     header_summary: "今月の部屋割り状況",
@@ -25,4 +25,11 @@ export const textDict = {
     adults: "大人",
     nights: "泊",
     person_unit: "名",
+}
+
+export const handleStatus = {
+    not_yet_paid: "未支払い",
+    paid_not_yet_checkin: "支払い済み、未チェックイン",
+    paid_checking: "支払い済み＆チェックイン済み",
+    cancelled: "キャンセル",
 }

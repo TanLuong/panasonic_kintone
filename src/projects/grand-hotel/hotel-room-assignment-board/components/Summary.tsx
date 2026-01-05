@@ -10,18 +10,18 @@ interface SummaryProps {
 
 const Summary: React.FC<SummaryProps> = ({ rooms }) => {
   const totalRooms = rooms.length;
-  const occupiedRooms = rooms.filter(room => room.status === RoomStatus.Occupied).length;
+  const occupiedRooms = rooms.filter(room => room.status === RoomStatus.Occupied || room.status === RoomStatus.NotCheckedIn).length;
   const occupancyRate = totalRooms > 0 ? (occupiedRooms / totalRooms * 100).toFixed(1) : '0.0';
-  
+
   const totalGuests = rooms.reduce((acc, room) => {
-    if (room.status === RoomStatus.Occupied && room.guest) {
+    if ((room.status === RoomStatus.Occupied || room.status === RoomStatus.NotCheckedIn) && room.guest) {
       return acc + room.guest.adults + room.guest.children;
     }
     return acc;
   }, 0);
 
   const totalRevenue = rooms.reduce((acc, room) => {
-    if (room.status === RoomStatus.Occupied && room.guest) {
+    if ((room.status === RoomStatus.Occupied || room.status === RoomStatus.NotCheckedIn) && room.guest) {
       return acc + room.guest.price;
     }
     return acc;

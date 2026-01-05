@@ -12,9 +12,9 @@ interface RoomCardProps {
 
 const statusStyles: { [key in RoomStatus]: string } = {
   [RoomStatus.Occupied]: 'status-occupied',
-  [RoomStatus.Available]: 'status-available',
-  [RoomStatus.NotSupported]: 'status-cleaning',
+  [RoomStatus.NotSupported]: 'status-available',
   [RoomStatus.CheckedOut]: 'status-cleaning',
+  [RoomStatus.NotCheckedIn]: 'status-occupied',
 };
 
 const paymentStatusStyles: { [key in PaymentStatus]: string } = {
@@ -36,12 +36,12 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
         </span>
       </div>
       <div className="room-card-body">
-        {room.status != RoomStatus.Available && room.guest ? (
+        {room.guest ? (
           <div>
             <div className="guest-info">
               <h4 className="guest-name">{
                 room?.guest?.reservationId ? <a href={link}>{room.guest.name}</a> : room.guest.name
-                }
+              }
               </h4>
               <div className="guest-meta">
                 <span>{textDict['adults']}: {room.guest.adults}{textDict['person_unit']}</span>
@@ -64,7 +64,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
         ) : (
           <div className="empty-state" style={{ height: '100%' }}>
             <pre>
-                {!room.description ? '本日は空室です' : room.description}
+              {!room.description ? '本日は空室です' : room.description}
             </pre>
           </div>
         )}
